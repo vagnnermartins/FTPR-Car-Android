@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyApiTest -Johnny Freire</string>
+    <string name="login_social_label">Login com Google</string>
 </resources>

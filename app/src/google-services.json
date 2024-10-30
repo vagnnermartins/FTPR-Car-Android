@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1090783472355",
+    "project_id": "carapitrabalhofinal",
+    "storage_bucket": "carapitrabalhofinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1090783472355:android:f0e3e9d001c641098033d6",
+        "android_client_info": {
+          "package_name": "com.example.myapitest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1090783472355-vb12vl1nogjlkepgtuod4pgqln6cdspm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapitest",
+            "certificate_hash": "267e050c5e9afe8b2f238c302ea0b8d841fde0ca"
+          }
+        },
+        {
+          "client_id": "1090783472355-j3vu4lkd5esm6iqlr7jrn24e92289gmv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhEzre6rol5e_ef1LCsWttFgxR0_DrQDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1090783472355-j3vu4lkd5esm6iqlr7jrn24e92289gmv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

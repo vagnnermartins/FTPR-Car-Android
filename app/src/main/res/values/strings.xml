@@ -6,4 +6,5 @@
     <string name="confirmar">Confirmar</string>
     <string name="fazer_logout">Fazer Logout</string>
     <string name="codigo_enviado">Código de verificação enviado</string>
+    <string name="preencher_campo">Por favor, preencha o campo: %1$s</string>
 </resources>

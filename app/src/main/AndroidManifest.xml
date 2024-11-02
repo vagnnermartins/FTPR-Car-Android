@@ -24,8 +24,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight"
         tools:targetApi="31">
+        <provider
+            android:authorities="com.example.myapitest.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
 
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths" />
 
+        </provider>
+        <activity
+            android:name=".NovoItemActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -35,9 +47,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDzlsCatOoc8E4ms00W69Smuusj0D_o3cM" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

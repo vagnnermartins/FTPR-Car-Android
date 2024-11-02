@@ -110,5 +110,9 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
+    companion object{
+        fun newIntent(context: Context) = Intent(context, LoginActivity::class.java)
+    }
+
 
 }

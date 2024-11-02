@@ -11,9 +11,9 @@ import com.example.myapitest.model.Item
 import com.example.myapitest.ui.loadUrl
 
 class ItemAdapter(
-    private val itens: List<Item>)
-    // private val itemClickListener: (Item) -> Unit,
-        : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+    private val itens: List<Item>,
+    private val itemClickListener: (Item) -> Unit,
+    ): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -33,9 +33,9 @@ class ItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = itens[position]
-       // holder.itemView.setOnClickListener {
-        //    itemClickListener.invoke(item)
-        //}
+       holder.itemView.setOnClickListener {
+           itemClickListener.invoke(item)
+       }
         holder.modelTextView.text = item.name
         holder.yearTextView.text = item.year
         holder.licenseTextView.text = item.licence

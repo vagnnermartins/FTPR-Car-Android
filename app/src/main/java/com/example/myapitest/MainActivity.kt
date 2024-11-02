@@ -101,19 +101,18 @@ class MainActivity : AppCompatActivity() {
                 when (resultado) {
                     is Result.Error -> {
                         Toast.makeText(this@MainActivity, "ERRO AO CARREGAR", Toast.LENGTH_LONG).show()}
-                    is Result.Success -> {
-                       binding.recyclerView.adapter = ItemAdapter(resultado.data)
-                    }
+                    is Result.Success -> handleOnSucess(resultado.data)
                 }
             }
 
        }}
 
-   // private fun handleOnSucess(data: List<Item>){
-     //   val adapter = ItemAdapter(data){
-
-       // }
-      //  binding.recyclerView.adapter = adapter
+    private fun handleOnSucess(data: List<Item>) {
+        val adapter = ItemAdapter(data) {
+            startActivity(DetalheItemActivity.newIntent(this, it.id))
+        }
+        binding.recyclerView.adapter = adapter
+    }
 
 
 

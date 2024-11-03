@@ -45,6 +45,28 @@ class DetalheItemActivity : AppCompatActivity() {
         binding.toolbar.setOnClickListener{
             finish()
         }
+
+        binding.btDeletar.setOnClickListener {
+            deletarItem()
+        }
+    }
+
+    private fun deletarItem() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val resultado = safeApiCall { RetrofitClient.apiService.deleteItem(itemDetalhe.id) }
+
+            withContext(Dispatchers.Main){
+                when(resultado){
+                    is Result.Error -> {
+                        Toast.makeText(this@DetalheItemActivity, "Erro ao deletar", Toast.LENGTH_LONG).show()
+                    }
+                    is Result.Success -> {
+                        Toast.makeText(this@DetalheItemActivity, "Item excluído com sucesso", Toast.LENGTH_LONG).show()
+                    }
+                }
+                finish()
+            }
+        }
     }
 
     private fun carregaItem(){

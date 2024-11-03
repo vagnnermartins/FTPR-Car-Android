@@ -92,7 +92,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchItems() {
-        CoroutineScope(Dispatchers.IO).launch { //Aqui faz a consulta dos dados dentro da Api
+        CoroutineScope(Dispatchers.IO).launch {
+            //Aqui faz a consulta dos dados dentro da Api
             val resultado = safeApiCall { apiService.getItems()
             }
 

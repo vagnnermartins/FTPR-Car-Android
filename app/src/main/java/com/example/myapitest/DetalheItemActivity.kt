@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapitest.databinding.ActivityDetalheItemBinding
 import com.example.myapitest.model.Item
+import com.example.myapitest.model.ItemGetId
 import com.example.myapitest.services.Result
 import com.example.myapitest.services.RetrofitClient
 import com.example.myapitest.services.safeApiCall
@@ -23,7 +24,7 @@ class DetalheItemActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetalheItemBinding
 
-    private lateinit var itemDetalhe: Item
+    private lateinit var itemDetalhe: ItemGetId
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +49,11 @@ class DetalheItemActivity : AppCompatActivity() {
 
     private fun carregaItem(){
         val idItem = intent.getStringExtra(ARG_ID) ?: ""  //não pode retornar nulo
-
+        System.out.println(idItem)
         CoroutineScope(Dispatchers.IO).launch {
             val detalhes = safeApiCall { RetrofitClient.apiService.getItem(idItem)
             }
+            System.out.println(idItem)
 
             withContext(Dispatchers.Main){
                 when (detalhes){
@@ -61,6 +63,7 @@ class DetalheItemActivity : AppCompatActivity() {
                                 show()}
                     is Result.Success -> {
                         itemDetalhe = detalhes.data
+                        System.out.println(itemDetalhe.value.imageUrl)
                         handleSucess()
                     }
                 }
@@ -70,10 +73,10 @@ class DetalheItemActivity : AppCompatActivity() {
     }
 
     private fun handleSucess() {
-        binding.tvNome.text = itemDetalhe.name
-        binding.tvAno.text = itemDetalhe.year
-        binding.tvPlaca.text = itemDetalhe.licence
-        binding.imageView.loadUrl(itemDetalhe.imageUrl)
+        binding.tvNome.text = itemDetalhe.value.name
+        binding.tvAno.text = itemDetalhe.value.year
+        binding.tvPlaca.text = itemDetalhe.value.licence
+        binding.imageView.loadUrl(itemDetalhe.value.imageUrl)
     }
 
     companion object{

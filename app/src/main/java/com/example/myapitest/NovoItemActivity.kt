@@ -20,11 +20,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.myapitest.databinding.ActivityNovoItemBinding
 import com.example.myapitest.model.Item
-import com.example.myapitest.model.ItemValue
+import com.example.myapitest.model.Place
 import com.example.myapitest.services.Result
 import com.example.myapitest.services.RetrofitClient
 import com.example.myapitest.services.safeApiCall
@@ -154,12 +152,13 @@ class NovoItemActivity : AppCompatActivity() {
     }
 
     private fun salvarDados(imageUrl: String) {
+        val vazio = ""
+        val placeData = Place(
+            vazio,
+            vazio
+        )
         CoroutineScope(Dispatchers.IO).launch {
-            val vazio = ""
-            val place = ItemValue(
-                vazio,
-                vazio
-            )
+
             val id = SecureRandom().nextInt().toString()
             val dados = Item(
                 id,
@@ -167,7 +166,7 @@ class NovoItemActivity : AppCompatActivity() {
                 binding.etAno.text.toString(),
                 binding.etNome.text.toString(),
                 binding.etPlaca.text.toString(),
-                place
+                place = placeData
             )
             System.out.println(dados)
             val resultado = safeApiCall { RetrofitClient.apiService.addItem(dados) }

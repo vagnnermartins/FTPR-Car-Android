@@ -4,8 +4,10 @@ import ItemAdapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapitest.databinding.ActivityMainBinding
 import com.example.myapitest.models.Car
 import com.example.myapitest.service.Result
@@ -60,6 +62,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupView() {
         logoutGoogle()
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = true
+            fetchItems()
+        }
+        binding.addCta.setOnClickListener {
+        //TODO: Adicionar novo item
+        }
     }
 
     private  fun setupGoogleAuthUser() {
@@ -102,7 +112,10 @@ class MainActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 binding.swipeRefreshLayout.isRefreshing = false
                 when (result) {
-                    is Result.Error -> {}
+                    is Result.Error -> {
+                        Log.e("MainActivity", "Error: ${result.message}")
+                        Toast.makeText(this@MainActivity, "Erro", Toast.LENGTH_SHORT).show()
+                    }
                     is Result.Success -> handleOnSuccess(result.data)
                 }
             }

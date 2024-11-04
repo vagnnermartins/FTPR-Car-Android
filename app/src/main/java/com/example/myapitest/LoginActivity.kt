@@ -87,6 +87,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     Log.d("LoginActivity", "signInWithCredential:success $user")
+                    startActivity(MainActivity.newIntent(this))
                 } else {
                     Log.w("LoginActivity", "signInWithCredential:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()

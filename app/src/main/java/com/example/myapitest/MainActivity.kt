@@ -1,24 +1,29 @@
 package com.example.myapitest
 
+import ItemAdapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapitest.databinding.ActivityMainBinding
+import com.example.myapitest.models.Car
+import com.example.myapitest.service.Result
+import com.example.myapitest.service.RetrofitClient
+import com.example.myapitest.service.safeApiCall
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var auth: FirebaseAuth
-    private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         requestLocationPermission()
+        setupGoogleAuthUser()
         setupView()
 
 
@@ -56,6 +62,21 @@ class MainActivity : AppCompatActivity() {
         logoutGoogle()
     }
 
+    private  fun setupGoogleAuthUser() {
+        googleSignInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN)
+    }
+
+
+
+
+    private fun handleOnSuccess(data: List<Car>) {
+        val adapter = ItemAdapter(data) {
+            // listener do item clicado
+        }
+        binding.recyclerView.adapter = adapter
+    }
+
+
     private fun logoutGoogle() {
         binding.logoutButton.setOnClickListener {
             googleSignInClient.signOut()
@@ -73,9 +94,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchItems() {
-        // TODO
-    }
+        // Alterando execução para IO thread
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = safeApiCall { RetrofitClient.apiService.getCars() }
 
+            // Alterando execução para Main thread
+            withContext(Dispatchers.Main) {
+                binding.swipeRefreshLayout.isRefreshing = false
+                when (result) {
+                    is Result.Error -> {}
+                    is Result.Success -> handleOnSuccess(result.data)
+                }
+            }
+        }
+    }
 
 
     companion object {

@@ -3,6 +3,8 @@ package com.example.myapitest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapitest.databinding.ActivityMainBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -13,6 +15,10 @@ import com.google.firebase.auth.FirebaseAuth
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         requestLocationPermission()
         setupView()
+
 
 
         // 1- Criar tela de Login com algum provedor do Firebase (Telefone, Google)
@@ -46,6 +53,18 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setupView() {
+        logoutGoogle()
+    }
+
+    private fun logoutGoogle() {
+        binding.logoutButton.setOnClickListener {
+            googleSignInClient.signOut()
+                .addOnCompleteListener {
+                    startActivity(LoginActivity.newIntent(this))
+                    finish()
+                }
+            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+        }
 
     }
 
@@ -56,6 +75,8 @@ class MainActivity : AppCompatActivity() {
     private fun fetchItems() {
         // TODO
     }
+
+
 
     companion object {
 

@@ -94,4 +94,10 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
     }
+
+    companion object {
+        fun newIntent(context: AppCompatActivity): Intent {
+            return Intent(context, LoginActivity::class.java)
+        }
+    }
 }

@@ -2,5 +2,11 @@
     <string name="app_name">MyApiTest - Johnny Freire</string>
     <string name="login_social_label">Login com Google</string>
     <string name="cars">Veículos</string>
+    <string name="hint_cellphone">+55 11 912345678</string>
+    <string name="code_brazil">+55</string>
+    <string name="send_sms">Enviar SMS</string>
+    <string name="hint_verify_sms">123456</string>
+    <string name="verify_sms">Verificar SMS</string>
     <string name="logout">Logout</string>
+    <string name="login">Login</string>
 </resources>

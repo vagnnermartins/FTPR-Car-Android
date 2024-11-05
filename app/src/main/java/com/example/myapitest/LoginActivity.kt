@@ -3,6 +3,7 @@ package com.example.myapitest
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -49,7 +50,10 @@ class LoginActivity : AppCompatActivity() {
 
         setupGoogleLogin()
         setupView()
+        verifyLoggedUser()
     }
+
+
 
     private fun setupView() {
         binding.loginSocialButton.setOnClickListener {
@@ -60,6 +64,12 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.btnVerifySms.setOnClickListener {
             verifyCode()
+        }
+    }
+
+    private fun verifyLoggedUser() {
+        if (auth.currentUser != null) {
+            navigateToMainActivity()
         }
     }
 

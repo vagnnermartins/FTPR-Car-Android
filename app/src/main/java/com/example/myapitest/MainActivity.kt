@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
     private fun fetchItems() {
 
         CoroutineScope(Dispatchers.IO).launch {
-            val result = safeApiCall { RetrofitClient.apiService.getCars() }
+            val result = safeApiCall { RetrofitClient.apiService.fetchCars() }
 
 
             withContext(Dispatchers.Main) {

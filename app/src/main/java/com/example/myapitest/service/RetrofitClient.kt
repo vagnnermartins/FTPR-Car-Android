@@ -1,6 +1,7 @@
 package com.example.myapitest.service
 
 
+import PrettyLogInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,9 +9,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private const val BASE_URL = "http://10.0.2.2:3000/" // Endereço usado para acessar o localhost no emulador android
+    private const val BASE_URL =
+        "http://10.0.2.2:3000/" // Endereço usado para acessar o localhost no emulador android
 
-    private val loggingInterceptor = HttpLoggingInterceptor().apply {
+    private val loggingInterceptor = HttpLoggingInterceptor(
+        PrettyLogInterceptor()
+    ).apply {
         // cria um interceptor para registrar logging no LogCat para cada
         // requisição realizada utilizando esse interceptor
         level = HttpLoggingInterceptor.Level.BODY

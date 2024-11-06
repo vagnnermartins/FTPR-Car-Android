@@ -96,7 +96,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleOnSuccess(data: List<Car>) {
         val adapter = ItemAdapter(data) {
-            // listener do item clicado
+            startActivity(CarDetailActivity.newIntent(
+                this,
+                it.id
+            ))
         }
         binding.recyclerView.adapter = adapter
     }
@@ -116,11 +119,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchItems() {
-        // Alterando execução para IO thread
+
         CoroutineScope(Dispatchers.IO).launch {
             val result = safeApiCall { RetrofitClient.apiService.getCars() }
 
-            // Alterando execução para Main thread
+
             withContext(Dispatchers.Main) {
                 binding.swipeRefreshLayout.isRefreshing = false
                 when (result) {

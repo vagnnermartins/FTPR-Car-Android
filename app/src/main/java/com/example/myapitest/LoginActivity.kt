@@ -42,6 +42,13 @@ class LoginActivity : AppCompatActivity() {
 
         setupGoogleLogin()
         setupView()
+        verifyLoggedUser()
+    }
+
+    private fun verifyLoggedUser() {
+        if (auth.currentUser != null) {
+            navigateToMainActivity()
+        }
     }
 
     private fun setupView() {
@@ -131,9 +138,18 @@ class LoginActivity : AppCompatActivity() {
         if (task.isSuccessful) {
             val user = auth.currentUser
             Log.d("LoginActivity", "LoginType: $loginType User: ${user?.uid}")
-            startActivity(MainActivity.newIntent(this))
+            navigateToMainActivity()
         } else {
             Toast.makeText(this, "Erro com o login usando o $loginType", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun navigateToMainActivity() {
+        startActivity(MainActivity.newIntent(this))
+        finish()
+    }
+
+    companion object {
+        fun newIntent(context: Context) = Intent(context, LoginActivity::class.java)
     }
 }

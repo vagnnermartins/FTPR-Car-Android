@@ -1,5 +1,7 @@
 package com.example.myapitest
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapitest.databinding.ActivityMainBinding
@@ -45,5 +47,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun fetchItems() {
         // TODO
+    }
+
+    companion object {
+        fun newIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 }

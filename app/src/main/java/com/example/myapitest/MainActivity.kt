@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        requestLocationPermission()
         setupGoogleAuthUser()
+
         setupView()
 
 
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             fetchItems()
         }
         binding.addCta.setOnClickListener {
-            //TODO: Adicionar novo item
+            startActivity(CreateCarActivity.newIntent(this))
         }
     }
 
@@ -96,10 +96,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleOnSuccess(data: List<Car>) {
         val adapter = ItemAdapter(data) {
-            startActivity(CarDetailActivity.newIntent(
-                this,
-                it.id
-            ))
+            startActivity(
+                CarDetailActivity.newIntent(
+                    this,
+                    it.id
+                )
+            )
         }
         binding.recyclerView.adapter = adapter
     }
@@ -114,9 +116,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun requestLocationPermission() {
-        // TODO
-    }
 
     private fun fetchItems() {
 
@@ -140,7 +139,6 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-
         fun newIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 }

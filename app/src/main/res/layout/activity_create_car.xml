@@ -6,49 +6,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateCarActivity">
+
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:titleTextColor="@android:color/black"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/black" />
+
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/name"
+        android:id="@+id/nameInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Name"
-        android:layout_marginTop="12dp"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:hint="@string/name"
+        android:imeOptions="actionNext"
+        android:inputType="textCapWords"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/yearModelLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameInput"
+        app:layout_constraintHorizontal_chainStyle="spread_inside">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/yearInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/year"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            app:layout_constraintEnd_toStartOf="@+id/separator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintWidth_percent="0.5"
+            />
+
+        <TextView
+            android:id="@+id/separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            app:layout_constraintBottom_toBottomOf="@id/yearInput"
+            app:layout_constraintStart_toEndOf="@id/yearInput"
+            app:layout_constraintTop_toTopOf="@id/yearInput"
+            app:layout_constraintWidth_percent="0.10"
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/modelInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/modelo"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            app:layout_constraintStart_toEndOf="@id/separator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.5"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/surname"
+        android:id="@+id/licenceInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="Surname"
-        app:layout_constraintStart_toStartOf="@id/name"
-        app:layout_constraintEnd_toEndOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/name" />
+        android:hint="Placa"
+        android:imeOptions="actionNext"
+        android:inputType="textCapCharacters"
+        app:layout_constraintEnd_toEndOf="@id/nameInput"
+        app:layout_constraintStart_toStartOf="@id/nameInput"
+        app:layout_constraintTop_toBottomOf="@id/yearModelLayout" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/age"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="12dp"
-        android:hint="Age"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/surname"
-        android:inputType="number" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/imageUrl"
@@ -56,38 +104,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="Image URL"
-        app:layout_constraintStart_toStartOf="@id/name"
-        app:layout_constraintEnd_toEndOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/age" />
+        android:imeOptions="actionDone"
+        app:layout_constraintEnd_toEndOf="@id/nameInput"
+        app:layout_constraintStart_toStartOf="@id/nameInput"
+        app:layout_constraintTop_toBottomOf="@id/licenceInput" />
+
 
     <ImageButton
         android:id="@+id/takePictureCta"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_camera"
-        app:layout_constraintTop_toBottomOf="@id/imageUrl"
+        app:layout_constraintEnd_toEndOf="@id/imageUrl"
         app:layout_constraintStart_toStartOf="@id/imageUrl"
-        app:layout_constraintEnd_toEndOf="@id/imageUrl"/>
+        app:layout_constraintTop_toBottomOf="@id/imageUrl" />
+
 
     <ProgressBar
         android:id="@+id/loadImageProgress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@id/imageUrl"
         app:layout_constraintBottom_toBottomOf="@id/takePictureCta"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/profession"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="Profession"
-        app:layout_constraintStart_toStartOf="@id/name"
-        app:layout_constraintEnd_toEndOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/takePictureCta" />
+        app:layout_constraintTop_toTopOf="@id/imageUrl" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mapContent"
@@ -96,8 +137,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/profession"
         app:layout_constraintBottom_toTopOf="@id/saveCta"
+        app:layout_constraintTop_toBottomOf="@id/takePictureCta"
         tools:visibility="visible">
 
         <fragment
@@ -107,15 +148,15 @@
             android:layout_height="match_parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <ImageButton
         android:id="@+id/saveCta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@android:drawable/ic_menu_save"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@android:drawable/ic_menu_save" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

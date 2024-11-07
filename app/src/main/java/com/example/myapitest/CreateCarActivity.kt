@@ -171,28 +171,22 @@ class CreateCarActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun saveData(imageUrl: String) {
-        val name = binding.name.text.toString()
 
-//        val itemPosition = selectedMarker?.position?.let {
-//            ItemLocation(
-//                name = name,
-//                it.latitude,
-//                it.longitude
-//            )
-//        }
+        val place = selectedMarker?.position?.let {
+            Place(
+                it.latitude,
+                it.longitude
+            )
+        }
         CoroutineScope(Dispatchers.IO).launch {
             val id = SecureRandom().nextInt().toString()
             val car = Car(
-                //TODO: Preencher com os dados do formulário
                 id = id,
-                name = binding.name.text.toString(),
-                year = "2021/2021",
+                name = binding.nameInput.text.toString(),
+                year = binding.yearInput.text.toString()+ "/" + binding.modelInput.text.toString(),
                 imageUrl = imageUrl,
-                licence = "ABC-1234",
-                place = Place(
-                    lat = -23.5505199,
-                    long = -46.63330939999999,
-                )
+                licence =  binding.licenceInput.text.toString(),
+                place = place ?: Place(0.0, 0.0)
 
 
             )
@@ -222,7 +216,7 @@ class CreateCarActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun validateForm(): Boolean {
         //TODO: Implementar validação do formulário
-        if (binding.name.text.toString().isBlank()) {
+        if (binding.nameInput.text.toString().isBlank()) {
             Toast.makeText(
                 this,
                 "Por favor, preencha o campo Nome",
@@ -230,19 +224,29 @@ class CreateCarActivity : AppCompatActivity(), OnMapReadyCallback {
             ).show()
             return false
         }
-        if (binding.surname.text.toString().isBlank()) {
+
+        if (binding.yearInput.text.toString().isBlank()) {
             Toast.makeText(
-                this,
-                "Por favor, preencha o campo Sobrenome",
-                Toast.LENGTH_SHORT
-            ).show()
-            return false
-        }
-        if (binding.age.text.toString().isBlank()) {
-            Toast.makeText(
-                this, "Por favor, preencha o campo Idade", Toast.LENGTH_SHORT
+                this, "Por favor, preencha o campo Ano", Toast.LENGTH_SHORT
             )
                 .show()
+            return false
+        }
+
+        if (binding.modelInput.text.toString().isBlank()) {
+            Toast.makeText(
+                this, "Por favor, preencha o campo Modelo", Toast.LENGTH_SHORT
+            )
+                .show()
+            return false
+        }
+
+        if (binding.licenceInput.text.toString().isBlank()) {
+            Toast.makeText(
+                this,
+                "Por favor, preencha o campo Placa",
+                Toast.LENGTH_SHORT
+            ).show()
             return false
         }
         if (imageFile == null) {
@@ -253,14 +257,7 @@ class CreateCarActivity : AppCompatActivity(), OnMapReadyCallback {
             ).show()
             return false
         }
-        if (binding.profession.text.toString().isBlank()) {
-            Toast.makeText(
-                this,
-                "Por favor, preencha o campo Profissão",
-                Toast.LENGTH_SHORT
-            ).show()
-            return false
-        }
+
         return true
     }
 

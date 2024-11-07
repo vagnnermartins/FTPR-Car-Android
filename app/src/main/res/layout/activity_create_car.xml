@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateCarActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/black" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/nameInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:hint="@string/name"
+        android:imeOptions="actionNext"
+        android:inputType="textCapWords"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/yearModelLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameInput"
+        app:layout_constraintHorizontal_chainStyle="spread_inside">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/yearInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/year"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            app:layout_constraintEnd_toStartOf="@+id/separator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintWidth_percent="0.5"
+            />
+
+        <TextView
+            android:id="@+id/separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            app:layout_constraintBottom_toBottomOf="@id/yearInput"
+            app:layout_constraintStart_toEndOf="@id/yearInput"
+            app:layout_constraintTop_toTopOf="@id/yearInput"
+            app:layout_constraintWidth_percent="0.10"
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/modelInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/modelo"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            app:layout_constraintStart_toEndOf="@id/separator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.5"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/licenceInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Placa"
+        android:imeOptions="actionNext"
+        android:inputType="textCapCharacters"
+        app:layout_constraintEnd_toEndOf="@id/nameInput"
+        app:layout_constraintStart_toStartOf="@id/nameInput"
+        app:layout_constraintTop_toBottomOf="@id/yearModelLayout" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/imageUrl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Image URL"
+        android:imeOptions="actionDone"
+        app:layout_constraintEnd_toEndOf="@id/nameInput"
+        app:layout_constraintStart_toStartOf="@id/nameInput"
+        app:layout_constraintTop_toBottomOf="@id/licenceInput" />
+
+
+    <ImageButton
+        android:id="@+id/takePictureCta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_camera"
+        app:layout_constraintEnd_toEndOf="@id/imageUrl"
+        app:layout_constraintStart_toStartOf="@id/imageUrl"
+        app:layout_constraintTop_toBottomOf="@id/imageUrl" />
+
+
+    <ProgressBar
+        android:id="@+id/loadImageProgress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/takePictureCta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageUrl" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mapContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/saveCta"
+        app:layout_constraintTop_toBottomOf="@id/takePictureCta"
+        tools:visibility="visible">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageButton
+        android:id="@+id/saveCta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@android:drawable/ic_menu_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

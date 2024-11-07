@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.minhaprimeiraapi.ui.loadUrl
+import com.example.myapitest.ui.loadUrl
 import com.example.myapitest.R
 
 import com.example.myapitest.models.Car

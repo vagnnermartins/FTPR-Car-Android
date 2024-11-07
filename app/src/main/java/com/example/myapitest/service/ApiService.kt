@@ -8,6 +8,7 @@ import retrofit2.http.DELETE
 
 import retrofit2.http.GET
 import retrofit2.http.PATCH
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ApiService {
@@ -23,4 +24,7 @@ interface ApiService {
 
     @PATCH("car/{id}")
     suspend fun updateCar(@Path("id") id: String, @Body car: Car)
+
+    @POST("car")
+    suspend fun createCar(@Body car: Car)
 }

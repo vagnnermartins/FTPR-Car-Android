@@ -1,5 +1,6 @@
-package com.example.minhaprimeiraapi.ui
+package com.example.myapitest.ui
 
+import CircleTransform
 import android.widget.ImageView
 import com.example.myapitest.R
 import com.squareup.picasso.Picasso

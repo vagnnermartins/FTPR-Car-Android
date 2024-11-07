@@ -11,13 +11,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.minhaprimeiraapi.ui.loadUrl
+import com.example.myapitest.ui.loadUrl
 import com.example.myapitest.databinding.ActivityCarDetailBinding
 import com.example.myapitest.models.Car
-import com.example.myapitest.models.ResponseCarWrapper
+import com.example.myapitest.service.Result
 import com.example.myapitest.service.RetrofitClient
 import com.example.myapitest.service.safeApiCall
-import com.example.myapitest.service.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,4 +1,3 @@
-package com.example.minhaprimeiraapi.ui
 
 import android.graphics.Bitmap
 import android.graphics.BitmapShader

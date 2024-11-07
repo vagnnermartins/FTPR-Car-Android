@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "1090783472355",
     "project_id": "carapitrabalhofinal",
-    "storage_bucket": "carapitrabalhofinal.appspot.com"
+    "storage_bucket": "carapitrabalhofinal.firebasestorage.app"
   },
   "client": [
     {

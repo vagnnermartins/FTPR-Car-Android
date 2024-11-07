@@ -12,4 +12,5 @@
     <string name="nome">Nome</string>
     <string name="year_model">Ano/Modelo</string>
     <string name="placa">Placa</string>
+    <string name="carro_criado_com_sucesso_com_id">Carro criado com sucesso com id %1$s</string>
 </resources>

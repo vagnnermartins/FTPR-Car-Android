@@ -3,6 +3,9 @@ package com.example.myapitest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.minhaprimeiraapi.ui.loadUrl
 import com.example.myapitest.databinding.ActivityCarDetailBinding
 import com.example.myapitest.models.Car
+import com.example.myapitest.models.ResponseCarWrapper
 import com.example.myapitest.service.RetrofitClient
 import com.example.myapitest.service.safeApiCall
 import com.example.myapitest.service.Result
@@ -24,7 +28,7 @@ class CarDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCarDetailBinding
 
-    private lateinit var car : Car
+    private lateinit var car: Car
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +54,14 @@ class CarDetailActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 when (result) {
                     is Result.Error -> {
-                        Toast.makeText(this@CarDetailActivity, "Erro ao carregar item", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@CarDetailActivity,
+                            "Erro ao carregar item",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         finish()
                     }
+
                     is Result.Success -> {
                         car = result.data.value
                         handleSuccess()
@@ -85,11 +94,85 @@ class CarDetailActivity : AppCompatActivity() {
     }
 
     private fun editItem() {
-        TODO("Not yet implemented")
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = safeApiCall {
+                RetrofitClient.apiService.updateCar(
+                    car.id,
+                    car.copy(
+                        name = binding.name.text.toString(),
+                        year = binding.year.text.toString(),
+                        licence = binding.license.text.toString()
+
+                    )
+                )
+            }
+            withContext(Dispatchers.Main) {
+                when (result) {
+                    is Result.Error -> {
+                        Toast.makeText(
+                            this@CarDetailActivity,
+                            "Erro ao atualizar Carro",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    is Result.Success -> {
+                        Toast.makeText(
+                            this@CarDetailActivity,
+                            "Carro atualizado com sucesso",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
+                    }
+                }
+            }
+        }
     }
 
     private fun deleteItem() {
-        TODO("Not yet implemented")
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = safeApiCall { RetrofitClient.apiService.deleteCar(car.id) }
+
+            withContext(Dispatchers.Main) {
+                when (result) {
+                    is Result.Error -> {
+                        Toast.makeText(
+                            this@CarDetailActivity,
+                            "Erro ao deletar Carro",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    is Result.Success -> {
+                        Toast.makeText(
+                            this@CarDetailActivity,
+                            "Carro deletado com sucesso",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
+                    }
+                }
+            }
+        }
+    }
+
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            currentFocus?.let { view ->
+                if (view !is EditText) {
+                    hideKeyboard()
+                    view.clearFocus()
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
+    }
+
+    fun hideKeyboard() {
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        currentFocus?.let {
+            inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
+        }
     }
 
     companion object {

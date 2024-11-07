@@ -9,4 +9,7 @@
     <string name="verify_sms">Verificar SMS</string>
     <string name="logout">Logout</string>
     <string name="login">Login</string>
+    <string name="nome">Nome</string>
+    <string name="year_model">Ano/Modelo</string>
+    <string name="placa">Placa</string>
 </resources>

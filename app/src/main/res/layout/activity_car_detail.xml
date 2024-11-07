@@ -5,6 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".CarDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -39,7 +41,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="28sp"
-     />
+        android:hint="@string/nome"
+        android:inputType="textCapWords"
+        />
 
     <EditText
         android:id="@+id/year"
@@ -51,6 +55,8 @@
         app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/year_model"
+        android:inputType="number"
         />
 
     <EditText
@@ -62,7 +68,10 @@
         app:layout_constraintTop_toBottomOf="@id/year"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="-" />
+        android:hint="@string/placa"
+        android:inputType="textCapCharacters"
+        android:textSize="20sp"
+        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

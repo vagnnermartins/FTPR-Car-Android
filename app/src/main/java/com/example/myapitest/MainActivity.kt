@@ -6,8 +6,18 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapitest.adapter.ItemAdapter
 import com.example.myapitest.databinding.ActivityMainBinding
+import com.example.myapitest.model.Item
+import com.example.myapitest.service.Result
+import com.example.myapitest.service.RetrofitClient
+import com.example.myapitest.service.safeApiCall
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,15 +51,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        // TODO
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     private fun requestLocationPermission() {
-        // TODO
     }
 
     private fun fetchItems() {
-        // TODO
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = safeApiCall {
+                RetrofitClient.apiService.getItems()
+            }
+
+            withContext(Dispatchers.Main) {
+                when (result) {
+                    is Result.Error -> {
+
+                    }
+                    is Result.Success -> handleFetchItemSuccess(result.data)
+                }
+            }
+        }
+    }
+
+    private fun handleFetchItemSuccess(items: List<Item>) {
+        val adapter = ItemAdapter(items) {
+
+        }
+        binding.recyclerView.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

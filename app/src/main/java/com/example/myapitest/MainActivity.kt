@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleFetchItemSuccess(items: List<Item>) {
         val adapter = ItemAdapter(items) {
-
+            startActivity(ItemDetailActivity.newIntent(this, it.id))
         }
         binding.recyclerView.adapter = adapter
     }

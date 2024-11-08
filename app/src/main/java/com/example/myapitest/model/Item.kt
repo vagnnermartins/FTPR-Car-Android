@@ -9,6 +9,11 @@ data class Item(
     val place: Place
 )
 
+data class SingleItem(
+    val id: String,
+    val value: Item,
+)
+
 data class Place(
     val lat: Float,
     val long: Float

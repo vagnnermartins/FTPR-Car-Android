@@ -53,6 +53,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupView() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
+        binding.addCta.setOnClickListener {
+            startActivity(NewItemActivity.newIntent(this))
+        }
     }
 
     private fun requestLocationPermission() {

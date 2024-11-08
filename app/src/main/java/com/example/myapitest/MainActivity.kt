@@ -1,8 +1,24 @@
 package com.example.myapitest
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapitest.adapter.ItemAdapter
 import com.example.myapitest.databinding.ActivityMainBinding
+import com.example.myapitest.model.Item
+import com.example.myapitest.service.Result
+import com.example.myapitest.service.RetrofitClient
+import com.example.myapitest.service.safeApiCall
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,14 +52,60 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        // TODO
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
+        binding.addCta.setOnClickListener {
+            startActivity(NewItemActivity.newIntent(this))
+        }
     }
 
     private fun requestLocationPermission() {
-        // TODO
     }
 
     private fun fetchItems() {
-        // TODO
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = safeApiCall {
+                RetrofitClient.apiService.getItems()
+            }
+
+            withContext(Dispatchers.Main) {
+                when (result) {
+                    is Result.Error -> {
+                        Toast.makeText(this@MainActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                    }
+                    is Result.Success -> handleFetchItemSuccess(result.data)
+                }
+            }
+        }
+    }
+
+    private fun handleFetchItemSuccess(items: List<Item>) {
+        val adapter = ItemAdapter(items) {
+            startActivity(ItemDetailActivity.newIntent(this, it.id))
+        }
+        binding.recyclerView.adapter = adapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_logout -> {
+                FirebaseAuth.getInstance().signOut()
+                val intent = LoginActivity.newIntent(this)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    companion object {
+        fun newIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 }

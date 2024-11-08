@@ -3,6 +3,7 @@ package com.example.myapitest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapitest.databinding.ActivityItemDetailBinding
 import com.example.myapitest.model.Item
@@ -67,6 +68,24 @@ class ItemDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         binding.toolbar.setNavigationOnClickListener {
             finish()
+        }
+        binding.deleteButton.setOnClickListener {
+            deleteItem()
+        }
+    }
+
+    private fun deleteItem() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = safeApiCall {
+                RetrofitClient.apiService.deleteItem(item.id)
+            }
+
+            when (result) {
+                is Result.Error -> {}
+                is Result.Success -> {
+                    finish()
+                }
+            }
         }
     }
 

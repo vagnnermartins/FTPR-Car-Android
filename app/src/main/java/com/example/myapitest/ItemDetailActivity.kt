@@ -40,6 +40,7 @@ class ItemDetailActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 when (result) {
                     is Result.Error -> {
+                        Toast.makeText(this@ItemDetailActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
                     }
                     is Result.Success -> {
                         item = result.data.value
@@ -81,7 +82,9 @@ class ItemDetailActivity : AppCompatActivity() {
             }
 
             when (result) {
-                is Result.Error -> {}
+                is Result.Error -> {
+                    Toast.makeText(this@ItemDetailActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                }
                 is Result.Success -> {
                     finish()
                 }

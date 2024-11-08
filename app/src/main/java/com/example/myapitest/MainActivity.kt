@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapitest.adapter.ItemAdapter
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 when (result) {
                     is Result.Error -> {
-
+                        Toast.makeText(this@MainActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
                     }
                     is Result.Success -> handleFetchItemSuccess(result.data)
                 }

@@ -35,14 +35,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ftprcar.model.Car
 import com.example.ftprcar.model.Place
 import com.example.ftprcar.ui.car.list.CarListViewModel
-import com.example.ftprcar.ui.theme.MainTheme
 import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -209,16 +207,5 @@ private fun FormContent(
         ) {
             Text(text = "Add Car")
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun FormContentPreview() {
-    MainTheme {
-        FormContent(
-            car = Car(Random.nextInt(100000).toString(), "", "", "", "", Place(0.0, 0.0)),
-            onSave = { car, uri -> println("saving") }
-        )
     }
 }

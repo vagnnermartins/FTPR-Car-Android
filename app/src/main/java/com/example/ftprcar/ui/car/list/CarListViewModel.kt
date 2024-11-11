@@ -18,7 +18,7 @@ class CarListViewModel : ViewModel() {
     private val _state = MutableStateFlow(CarListState())
     val state: StateFlow<CarListState> = _state.asStateFlow()
 
-    val storageRef = FirebaseStorage.getInstance().reference
+    private val storageRef = FirebaseStorage.getInstance().reference
 
     init {
         fetchCars()

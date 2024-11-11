@@ -20,7 +20,6 @@ private object Screens {
 
 object Arguments {
     const val CAR_ID = "carId"
-    const val CAR = "car"
 }
 
 private object Routes {

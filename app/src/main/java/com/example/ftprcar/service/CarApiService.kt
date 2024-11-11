@@ -21,9 +21,6 @@ interface CarApiService {
     @POST("car")
     suspend fun addCar(@Body car: Car): Car
 
-    @POST("car")
-    suspend fun addCars(@Body cars: List<Car>): Car
-
     @PATCH("car/{id}")
     suspend fun updateCar(@Path("id") id: String, @Body car: Car): Car
 }

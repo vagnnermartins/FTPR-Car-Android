@@ -33,8 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.AsyncImage
 import com.example.ftprcar.model.Car
+import com.example.ftprcar.ui.car.composables.CarAsyncImage
 import com.example.ftprcar.ui.theme.MainTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -152,12 +152,11 @@ fun CarListItem(car: Car, onCarPressed: (Car) -> Unit, onPlacePressed: (Car) -> 
     ListItem(
         modifier = Modifier.clickable { onCarPressed(car) },
         leadingContent = {
-            AsyncImage(
-                model = car.imageUrl,
-                contentDescription = car.name,
+            CarAsyncImage(
                 modifier = Modifier
                     .width(100.dp)
                     .padding(end = 8.dp),
+                imageUrl = car.imageUrl,
                 contentScale = ContentScale.Fit
             )
         },

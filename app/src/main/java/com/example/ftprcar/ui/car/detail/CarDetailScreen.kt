@@ -2,6 +2,7 @@ package com.example.ftprcar.ui.car.detail
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,7 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
+import com.example.ftprcar.model.Car
+import com.example.ftprcar.ui.car.composables.CarAsyncImage
 import com.example.ftprcar.ui.car.list.CarListViewModel
 import kotlinx.coroutines.launch
 
@@ -100,40 +102,7 @@ fun CarDetailScreen(
         }
     ) { paddingValues ->
         car?.let { carDetails ->
-            Column(
-                modifier = Modifier
-                    .padding(paddingValues)
-                    .verticalScroll(rememberScrollState())
-                    .fillMaxSize()
-            ) {
-                AsyncImage(
-                    model = carDetails.imageUrl,
-                    contentDescription = "Car image",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(250.dp),
-                    contentScale = ContentScale.Crop
-                )
-
-                Column(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth()
-                ) {
-                    DetailItem(
-                        title = "Name",
-                        value = carDetails.name
-                    )
-                    DetailItem(
-                        title = "Year",
-                        value = carDetails.year
-                    )
-                    DetailItem(
-                        title = "Licence",
-                        value = carDetails.licence
-                    )
-                }
-            }
+            CarDetails(carDetails, paddingValues)
         } ?: run {
             Box(
                 modifier = Modifier
@@ -143,6 +112,43 @@ fun CarDetailScreen(
             ) {
                 Text("Car not found")
             }
+        }
+    }
+}
+
+@Composable
+private fun CarDetails(carDetails: Car, paddingValues: PaddingValues) {
+    Column(
+        modifier = Modifier
+            .padding(paddingValues)
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
+    ) {
+        CarAsyncImage(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(250.dp),
+            imageUrl = carDetails.imageUrl,
+            contentScale = ContentScale.Crop
+        )
+
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+        ) {
+            DetailItem(
+                title = "Name",
+                value = carDetails.name
+            )
+            DetailItem(
+                title = "Year",
+                value = carDetails.year
+            )
+            DetailItem(
+                title = "Licence",
+                value = carDetails.licence
+            )
         }
     }
 }

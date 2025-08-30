@@ -1,3 +1,31 @@
 <resources>
-    <string name="app_name">MyApiTest - COLOQUE O SEU NOME AQUI</string>
+    <string name="app_name">MyApiTest - Eduardo dos Santos</string>
+    <string name="error_login_verification">Erro ao verificar o código SMS</string>
+    <string name="error_login">Erro ao fazer login</string>
+    <string name="success_login_sent">Código enviado por SMS</string>
+    <string name="exit">Sair</string>
+    <string name="resquest_code">Informe o código de verificação</string>
+    <string name="resquest_number">Informe o número do telefone</string>
+    <string name="erro_desconhecido">Erro desconhecido</string>
+    <string name="permissao_de_localizacao_negada">Permissão de localização negada</string>
+    <string name="error_camera_permission">Permissão de câmera não concedida</string>
+    <string name="error_upload_image">Erro ao realizar o upload da imagem</string>
+    <string name="error_validate_form">Por favor, preencha o campo %1$s</string>
+    <string name="error_validate_form_location">Por favor, selecione a localização no mapa.</string>
+    <string name="error_validate_year_format">O ano deve ser informado no formato 2020/2020</string>
+    <string name="error_validate_license_format">A placa deve estar no formato ABC-1234</string>
+    <string name="erro_create">Erro ao salvar item</string>
+    <string name="success_create">Item %1$s adicionado com sucesso!</string>
+    <string name="erro_ao_buscar_carros">Erro ao buscar carros</string>
+    <string name="esta_aqui">Está aqui</string>
+    <string name="erro_get">Erro ao buscar carro</string>
+    <string name="licence_ex">Licence (ex: ABC-1234)</string>
+    <string name="year_ex">Year (ex: 2020/2020)</string>
+    <string name="name">Name</string>
+    <string name="image_url">Image URL</string>
+    <string name="success_update">Carro atualizado com sucesso</string>
+    <string name="erro_update">Erro ao atualizar o carro</string>
+    <string name="success_delete">Carro excluido com sucesso</string>
+    <string name="erro_delete">Erro ao excluir carro</string>
+    <string name="precisa_validar">Usuário deveria ter selecionado uma localização</string>
 </resources>

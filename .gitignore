@@ -44,3 +44,4 @@ local.properties
 # OS specific files
 .DS_Store
 Thumbs.db
+/app/src/google-services.json

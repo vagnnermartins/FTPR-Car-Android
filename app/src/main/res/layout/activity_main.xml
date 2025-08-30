@@ -22,14 +22,37 @@
                 app:layout_constraintBottom_toTopOf="@id/addCta"
                 tools:listitem="@layout/item_car_layout" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"/>
+
+
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/addCta"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
+                android:src="@android:drawable/ic_menu_add"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guideline" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/logoutCta"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:text="@string/exit"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="@id/guideline"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@android:drawable/ic_menu_add" />
+                app:layout_constraintBottom_toBottomOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

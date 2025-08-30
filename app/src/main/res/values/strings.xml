@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">MyApiTest - COLOQUE O SEU NOME AQUI</string>
+    <string name="app_name">MyApiTest - Renan Fabricio Menezes Saccon</string>
+    <string name="login">Login</string>
+    <string name="telefoneHint">+5511912345678</string>
+    <string name="senhaHint">101010</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="fazer_logout">Fazer Logout</string>
+    <string name="codigo_enviado">Código de verificação enviado</string>
+    <string name="preencher_campo">Por favor, preencha o campo: %1$s</string>
 </resources>

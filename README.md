@@ -15,7 +15,7 @@ Implemente uma tela de login que use um dos provedores de autenticação do Fire
 
 - **Autenticação por telefone**:
     - Configure o Firebase para aceitar o número de telefone: `+55 11 91234-5678`.
-    - Defina o código de verificação para login de teste como `123456`.
+    - Defina o código de verificação para login de teste como `101010`.
 
 - **Autenticação com Google** (caso escolha esta opção) (OPCIONAL):
     - Habilite a autenticação com Google nas configurações do Firebase Console.
@@ -32,13 +32,13 @@ Implemente a integração com uma API REST disponível no [Link] (https://github
 - **Estrutura JSON Esperada**:
     ```json
     {
-      "imageUrl": "https://image",
-      "year": "2020/2020",
-      "name": "Gaspar",
+      "imageUrl": "https://imgd.aeplcdn.com/664x374/n/cw/ec/27074/civic-exterior-right-front-three-quarter-148155.jpeg?q=80",
+      "year": "2022/2023",
+      "name": "Civic",
       "licence": "ABC-1234",
       "place": {
-        "lat": 0,
-        "long": 0
+        "lat": -28.0649267,
+        "long": -52.0059733
       }
     }
     ```

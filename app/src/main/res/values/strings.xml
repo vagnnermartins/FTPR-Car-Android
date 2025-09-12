@@ -1,3 +1,34 @@
 <resources>
-    <string name="app_name">MyApiTest - COLOQUE O SEU NOME AQUI</string>
+    <string name="app_name">MyApiTest - Júlia Spader Bianchi</string>
+    <string name="error_request_location_permission">Permissão de localização negada!</string>
+    <string name="unknown_error">Erro Desconhecido</string>
+    <string name="error_login">Erro ao fazer Login</string>
+    <string name="success_login_sent">Código enviado por SMS\n</string>
+    <string name="error_login_verification">Erro ao verificar o código SMS</string>
+    <string name="erro_delete">Ocorreu um erro ao deletar o item.</string>
+    <string name="success_delete">Item deletado com sucesso!</string>
+    <string name="sair">Sair</string>
+    <string name="logout">Sair</string>
+    <string name="empty_list">A lista de itens está vazia!</string>
+    <string name="error_validate_form">Por favor, preencha o campo: %1$s</string>
+    <string name="error_validate_form_location">Por favor, selecione a localização no mapa.</string>
+    <string name="error_create">Erro ao criar o carro</string>
+    <string name="success_create">Carro %1$s adicionado com sucesso!</string>
+    <string name="error_upload_image">Erro ao fazer o upload da imagem.</string>
+    <string name="error_request_camera">Permissão de câmera não concedida</string>
+    <string name="error_update">Erro ao atualizar o item</string>
+    <string name="success_update">Item atualizado com sucesso!</string>
+    <string name="detail_tv_name">Nome:</string>
+    <string name="detail_tv_license">Placa:</string>
+    <string name="title_login">Login</string>
+    <string name="et_cellphone">Celular</string>
+    <string name="cellphone_code">+5511</string>
+    <string name="send_sms">Enviar SMS</string>
+    <string name="verify_code">101010</string>
+    <string name="verify_sms">Verificar SMS</string>
+    <string name="new_item_form_name">Nome</string>
+    <string name="new_item_form_year">Ano</string>
+    <string name="new_item_form_license">Placa</string>
+    <string name="new_item_form_image_url">Image URL</string>
+    <string name="detail_tv_year">Ano:</string>
 </resources>

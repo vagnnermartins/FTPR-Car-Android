@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">MyApiTest - COLOQUE O SEU NOME AQUI</string>
+    <string name="app_name">Where is the Car?</string>
+    <string name="car_year">Ano: %1$s</string>
+    <string name="error_delete">Erro ao deletar o carro</string>
+    <string name="success_delete">Carro deletado com sucesso</string>
+    <string name="error_request_location_permission">Permissão de localização negada!</string>
+    <string name="unknown_error">Erro Desconhecido</string>
+    <string name="error_validate_form">Por favor, preencha o campo: %1$s</string>
+    <string name="error_validate_form_location">Por favor, selecione a localização no mapa.</string>
+    <string name="error_create">Erro ao criar o carro</string>
+    <string name="success_create">Carro %1$s adicionado com sucesso!</string>
+    <string name="error_request_camera">Permissão de câmera não concedida</string>
+    <string name="error_upload_image">Erro ao realizar o upload da imagem</string>
+    <string name="error_login">Erro ao fazer Login</string>
+    <string name="success_login_sent">Código enviado por SMS\n</string>
+    <string name="error_login_verification">Erro ao verificar o código SMS</string>
+    <string name="error_update">Erro ao atualizar o carro</string>
+    <string name="success_update">Carro atualizado com sucesso!</string>
 </resources>

@@ -14,17 +14,18 @@
         android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/model"
+        android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Honda Civic" />
+        tools:text="Vagner Martins" />
 
     <TextView
         android:id="@+id/year"
@@ -32,18 +33,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@id/image"
-        app:layout_constraintTop_toBottomOf="@id/model"
+        app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="2019/2019" />
+        tools:text="30" />
 
     <TextView
-        android:id="@+id/license"
+        android:id="@+id/address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toBottomOf="@id/year"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="ABC-1234"/>
+        tools:text="Av Paulista 1000, São Paulo-SP"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

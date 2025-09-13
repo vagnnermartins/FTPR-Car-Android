@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "90971232848",
+    "project_id": "whereisthecar-70d8a",
+    "storage_bucket": "whereisthecar-70d8a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90971232848:android:83a316fdecb056b61e8f55",
+        "android_client_info": {
+          "package_name": "com.example.whereisthecar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyU-mKmPsJxK8qnox03dfYFzoKJMeFBc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

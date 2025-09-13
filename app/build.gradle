@@ -2,14 +2,15 @@ plugins {
     id 'kotlin-kapt'
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
-    namespace 'com.example.myapitest'
+    namespace 'com.example.whereisthecar'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.myapitest"
+        applicationId "com.example.whereisthecar"
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -36,6 +37,8 @@ android {
     }
     buildFeatures {
         compose true
+        dataBinding true
+        viewBinding true
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.4.3'
@@ -45,17 +48,9 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
-    buildFeatures {
-        dataBinding true // Habilita o Data Binding
-    }
-    viewBinding {
-        enabled = true
-    }
 }
 
 kapt {
-
-    // Define o diretório onde o Room exportará o esquema do banco de dados
     arguments {
         arg("room.schemaLocation", "$projectDir/schemas")
     }
@@ -93,6 +88,15 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:2.6.1"
     kapt "androidx.room:room-compiler:2.6.1"
     implementation "androidx.room:room-ktx:2.6.1"
+
+    // Firebase BOM (mantém todas as libs na mesma versão)
+    implementation platform('com.google.firebase:firebase-bom:33.3.0')
+
+    // Firebase Authentication
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+    // Firebase Storage
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

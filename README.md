@@ -1,104 +1,83 @@
-# Exercício: Integração de Autenticação e API REST no Aplicativo Android
+# ✅ Checklist do Projeto - Car API Test
 
-Este projeto envolve a criação de uma tela de login com o Firebase, integração de uma API REST e a exibição de dados em um aplicativo Android. Siga as instruções abaixo para configurar e implementar as funcionalidades solicitadas.
+## Leonardo Brombilla Antunes
 
-### Requisitos
+## 📋 Funcionalidades Implementadas
 
-- **IDE**: Android Studio
-- **Bibliotecas**: Firebase Authentication, Firebase Storage, Retrofit (para requisições REST), Google Maps
+- [x] **Utilização do Compose**
+- [x] **Tela de Login com Firebase (Autenticação por Telefone)**
+- [x] **Opção de Logout**
+- [x] **Integração com API REST `/car` (CRUD Completo)**
+- [x] **Firebase Storage para Upload de Imagens**
+- [x] **Exibição de Localização no Google Maps**
+- [x] **Seleção de Localização no Mapa**
 
-## Instruções
 
-### 1. Tela de Login com Firebase
+https://github.com/user-attachments/assets/14e3716d-ca50-4bd6-86b1-23d0a91b6a56
 
-Implemente uma tela de login que use um dos provedores de autenticação do Firebase (recomenda-se usar autenticação por telefone ou Google).
 
-- **Autenticação por telefone**:
-    - Configure o Firebase para aceitar o número de telefone: `+55 11 91234-5678`.
-    - Defina o código de verificação para login de teste como `123456`.
+## ⚠️ Funcionalidades Pendentes
 
-- **Autenticação com Google** (caso escolha esta opção) (OPCIONAL):
-    - Habilite a autenticação com Google nas configurações do Firebase Console.
-    - Implemente a lógica de autenticação no aplicativo, usando o provedor de login do Google.
-
-### 2. Opção de Logout
-
-Adicione uma opção de logout ao aplicativo, permitindo que o usuário saia da conta autenticada. Essa opção deve estar disponível em uma área visível, como o menu principal ou um botão específico na interface.
-
-### 3. Integração com API REST `/car`
-
-Implemente a integração com uma API REST disponível no [Link] (https://github.com/vagnnermartins/FTPR-Car-Api-Node-Express) para exibir e salvar informações de carros no aplicativo.
-
-- **Estrutura JSON Esperada**:
-    ```json
-    {
-      "imageUrl": "https://image",
-      "year": "2020/2020",
-      "name": "Gaspar",
-      "licence": "ABC-1234",
-      "place": {
-        "lat": 0,
-        "long": 0
-      }
-    }
-    ```
-
-- **Requisitos Específicos**:
-    - O campo `imageUrl` deve apontar para uma imagem armazenada no Firebase Storage.
-    - Exiba a imagem e as informações de cada carro no aplicativo.
-    - Utilize Retrofit para realizar as requisições à API.
-
-### 4. Exibir Localização no Google Maps
-
-Utilize a API do Google Maps para exibir o local (`place`) associado ao carro. Essa localização é especificada pelos campos `lat` e `long` no JSON da API.
+- [ ] **Autenticação com Google Sign-In**
 
 ---
 
-### Configuração do Projeto
+## ⚙️ Configuração Necessária
 
-1. **Firebase**: Configure o projeto com Firebase Authentication e Firebase Storage. Adicione o `google-services.json` ao projeto para integração.
-2. **Google Maps**: Habilite a API do Google Maps e adicione uma chave de API ao projeto.
-3. **Dependências Gradle**:
-    - **Firebase**: `Firebase Authentication` e `Firebase Storage`
-    - **Retrofit** para a comunicação com a API REST
-    - **Picasso** ou outra biblioteca para carregamento de imagens
-    - **Google Maps SDK** 
+### 🔥 Firebase
 
-### Entrega do Exercício
+- [x] Projeto criado no Firebase Console
+- [x] Authentication habilitado (Phone)
+- [x] Storage configurado
+- [x] Arquivo `google-services.json` adicionado
 
-Aqui está a seção detalhada sobre a entrega do projeto com as instruções para fazer um fork:
+### 🗺️ Google Maps
+
+- [x] Maps SDK habilitado no Google Cloud Console
+- [x] API Key criada e configurada
+- [x] API Key adicionada no `AndroidManifest.xml`
+
+### 🌐 API REST
+
+- [x] API Node.js configurada e rodando
+- [x] URL base configurada no app
+- [x] Retrofit implementado
 
 ---
 
-### Entrega do Projeto
+## 📱 Dados de Teste
 
-Para enviar o projeto finalizado, siga os passos abaixo:
+### Autenticação Firebase
 
-1. **Faça um Fork do Projeto**:
-    - No GitHub, vá até a página do repositório original.
-    - Clique em "Fork" no canto superior direito da página para criar uma cópia do repositório em seu GitHub pessoal.
+- **Telefone**: `+55 11 91234-5678`
+- **Código**: `123456`
 
-2. **Clone o Repositório Forkado**:
-    - No seu perfil do GitHub, acesse o repositório forkado.
-    - Copie o link de clonagem (HTTPS ou SSH).
-    - No terminal, clone o repositório em sua máquina local:
-      ```bash
-      git clone <link-do-repositorio-forkado>
-      ```
+### URLs da API
 
-3. **Implemente as Funcionalidades**:
-    - Siga as instruções do exercício para implementar as funcionalidades.
-    - Após concluir, adicione, faça commit e push das alterações para o repositório forkado.
+- **Emulador**: `http://10.0.2.2:3000/`
+- **Dispositivo Real**: `http://SEU_IP:3000/`
 
-4. **Publicação**:
-    - **Opção 1**: Envie o projeto final no seu repositório forkado. Compartilhe o link do repositório com o instrutor para avaliação.
-    - **Opção 2**: Faça um Pull Request para o repositório original. Para isso:
-        - Acesse o repositório original no GitHub.
-        - Clique em "Compare & pull request" para iniciar o processo de Pull Request.
-        - Descreva as alterações feitas e confirme o envio.
+### Estrutura JSON da API
 
-> **Nota**: Certifique-se de que o código está organizado e que todas as funcionalidades foram devidamente testadas antes de enviar o projeto.
+```json
+{
+  "id": "1",
+  "imageUrl": "https://firebasestorage.googleapis.com/...",
+  "year": "2020/2021",
+  "name": "Honda Civic",
+  "licence": "ABC-1234",
+  "place": {
+    "lat": -23.5505,
+    "long": -46.6333
+  }
+}
+```
 
---- 
+---
 
-Boa entrega e sucesso no desenvolvimento!
+## 📁 Arquivos de Configuração Essenciais
+
+- [x] `app/google-services.json`
+- [x] Google Maps API Key no `AndroidManifest.xml`
+- [x] Dependências no `build.gradle`
+- [x] Permissões no `AndroidManifest.xml`

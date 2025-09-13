@@ -1,49 +1,172 @@
 package com.example.myapitest
 
+import HomeScreen
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.example.myapitest.databinding.ActivityMainBinding
+import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.myapitest.domain.model.AuthState
+import com.example.myapitest.presentation.ui.addcar.AddCarScreen
+import com.example.myapitest.presentation.ui.auth.LoginScreen
+import com.example.myapitest.presentation.ui.cardetail.CarDetailScreen
+import com.example.myapitest.presentation.viewmodel.AuthViewModel
+import com.example.myapitest.presentation.viewmodel.CarViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity() {
+sealed class Screen(val route: String) {
+    object Login : Screen("login")
+    object Home : Screen("home")
+    object CarDetail : Screen("car_details")
+}
 
-    private lateinit var binding: ActivityMainBinding
+class MainActivity : ComponentActivity() {
+    private val authViewModel: AuthViewModel by viewModels()
+    private val carViewModel: CarViewModel by viewModels()
+
+    private val googleSignInLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        try {
+            val account = task.getResult(ApiException::class.java)
+            authViewModel.signInWithGoogle(account)
+        } catch (e: ApiException) {
+            Log.w("MainActivity", "Google sign in failed", e)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        requestLocationPermission()
-        setupView()
 
-        // 1- Criar tela de Login com algum provedor do Firebase (Telefone, Google)
-        //      Cadastrar o Seguinte celular para login de test: +5511912345678
-        //      Código de verificação: 101010
-
-        // 2- Criar Opção de Logout no aplicativo
-
-        // 3- Integrar API REST /car no aplicativo
-        //      API será disponibilida no Github
-        //      JSON Necessário para salvar e exibir no aplicativo
-        //      O Image Url deve ser uma foto armazenada no Firebase Storage
-        //      { "id": "001", "imageUrl":"https://image", "year":"2020/2020", "name":"Gaspar", "licence":"ABC-1234", "place": {"lat": 0, "long": 0} }
-
-        // Opcionalmente trabalhar com o Google Maps ara enviar o place
+        setContent {
+            MyApiTestApp(
+                authViewModel = authViewModel,
+                carViewModel = carViewModel,
+                onGoogleSignIn = { startGoogleSignIn() },
+                activity = this
+            )
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        fetchItems()
+    private fun startGoogleSignIn() {
+        try {
+            val webClientId = "CHANGE_ME"
+
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(webClientId)
+                .requestEmail()
+                .build()
+
+            val googleSignInClient = GoogleSignIn.getClient(this, gso)
+            val signInIntent = googleSignInClient.signInIntent
+            googleSignInLauncher.launch(signInIntent)
+
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Google Sign-In configuration error: ${e.message}")
+            Log.e("MainActivity", "Make sure you have google-services.json configured properly")
+        }
+    }
+}
+
+@Composable
+fun MyApiTestApp(
+    authViewModel: AuthViewModel,
+    carViewModel: CarViewModel,
+    onGoogleSignIn: () -> Unit,
+    activity: MainActivity
+) {
+    val navController = rememberNavController()
+    val authState by authViewModel.authState.observeAsState()
+
+    val currentUser = FirebaseAuth.getInstance().currentUser
+    val startDestination = if (currentUser != null) Screen.Home.route else Screen.Login.route
+
+    LaunchedEffect(authState) {
+        when (authState) {
+            is AuthState.Success -> {
+                navController.navigate(Screen.Home.route) {
+                    popUpTo(Screen.Login.route) { inclusive = true }
+                }
+            }
+
+            is AuthState.SignedOut -> {
+                navController.navigate(Screen.Login.route) {
+                    popUpTo(0) { inclusive = true }
+                }
+            }
+
+            else -> { /* Handle other states */
+            }
+        }
     }
 
-    private fun setupView() {
-        // TODO
-    }
+    NavHost(
+        navController = navController,
+        startDestination = startDestination
+    ) {
+        composable(Screen.Login.route) {
+            LoginScreen(
+                authViewModel = authViewModel,
+                onGoogleSignIn = onGoogleSignIn,
+                activity = activity
+            )
+        }
 
-    private fun requestLocationPermission() {
-        // TODO
-    }
+        composable(Screen.Home.route) {
+            HomeScreen(
+                authViewModel = authViewModel,
+                onSignOut = {
+                    authViewModel.signOut()
+                },
+                onCarClick = { carId ->
+                    navController.navigate("car_detail/$carId")
+                },
+                onAddCarClick = {
+                    navController.navigate("add_car")
+                },
+                onDeleteCarClick = { id ->
+                    carViewModel.deleteCar(id)
+                }
+            )
+        }
 
-    private fun fetchItems() {
-        // TODO
+        composable(
+            "car_detail/{carId}",
+            arguments = listOf(navArgument("carId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val carId = backStackEntry.arguments?.getString("carId") ?: ""
+            CarDetailScreen(
+                carId = carId,
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable("add_car") {
+            AddCarScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onCarAdded = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
     }
 }

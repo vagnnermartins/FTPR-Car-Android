@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "214491401404",
+    "project_id": "projetoapisdesenvolvimentopos",
+    "storage_bucket": "projetoapisdesenvolvimentopos.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214491401404:android:a6ae7690d720e7417854b9",
+        "android_client_info": {
+          "package_name": "com.example.myapitest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJGZk7Pdy8Jhw9MN-ZaUQZO9uvQ3I3MYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

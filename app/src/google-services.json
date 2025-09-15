@@ -1,0 +1,30 @@
+
+{
+  "project_info": {
+    "project_number": "483393550323",
+    "project_id": "car-shopping-f0811",
+    "storage_bucket": "car-shopping-f0811.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483393550323:android:a7595ad0ba1d30f67cc486",
+        "android_client_info": {
+          "package_name": "com.example.myapitest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuAzfNxDFA4yYalHFNX_o_X4yejXGLSMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

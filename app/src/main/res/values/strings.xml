@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">MyApiTest - COLOQUE O SEU NOME AQUI</string>
+    <string name="app_name">MyApiTest - Matheus França da Silva</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_login_screen">LoginScreen</string>
+    <string name="welcome">Seja bem-vindo!</string>
+    <string name="phone_number">Número de telefone</string>
+    <string name="send_verification_code">Enviar código de verificação</string>
+    <string name="verification_code">Código de verificação</string>
+    <string name="verify_code">Verificar código</string>
+    <string name="google_login">Login pela conta Google</string>
+    <string name="insert_number">Insira seu telefone para continuar</string>
+    <string name="default_web_client_id">655231283364-a9x72m3n8w4jb6e0c7r1u905zlf83q21.apps.googleusercontent.com</string>
 </resources>

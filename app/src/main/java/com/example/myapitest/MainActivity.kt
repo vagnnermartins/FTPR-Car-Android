@@ -1,49 +1,54 @@
 package com.example.myapitest
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.example.myapitest.databinding.ActivityMainBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.myapitest.ui.navigation.Screen
+import com.example.myapitest.ui.screens.LoginScreen
+import com.example.myapitest.ui.screens.MainScreen
+import com.example.myapitest.ui.theme.MyApiTestTheme
+import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
+class MainActivity : ComponentActivity() {
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        requestLocationPermission()
-        setupView()
+        val startDestination = if (auth.currentUser != null)
+            "main_screen"
+        else
+            Screen.Login.route
 
-        // 1- Criar tela de Login com algum provedor do Firebase (Telefone, Google)
-        //      Cadastrar o Seguinte celular para login de test: +5511912345678
-        //      Código de verificação: 101010
 
-        // 2- Criar Opção de Logout no aplicativo
+        setContent {
+            MyApiTestTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    val navController = rememberNavController()
 
-        // 3- Integrar API REST /car no aplicativo
-        //      API será disponibilida no Github
-        //      JSON Necessário para salvar e exibir no aplicativo
-        //      O Image Url deve ser uma foto armazenada no Firebase Storage
-        //      { "id": "001", "imageUrl":"https://image", "year":"2020/2020", "name":"Gaspar", "licence":"ABC-1234", "place": {"lat": 0, "long": 0} }
+                    NavHost(
+                        navController = navController,
+                        startDestination = startDestination
+                    ) {
+                        composable(route = Screen.Login.route) {
+                            LoginScreen(navController = navController)
+                        }
 
-        // Opcionalmente trabalhar com o Google Maps ara enviar o place
-    }
-
-    override fun onResume() {
-        super.onResume()
-        fetchItems()
-    }
-
-    private fun setupView() {
-        // TODO
-    }
-
-    private fun requestLocationPermission() {
-        // TODO
-    }
-
-    private fun fetchItems() {
-        // TODO
+                        composable(route = "main_screen") {
+                            MainScreen(rootNavController = navController)
+                        }
+                    }
+                }
+            }
+        }
     }
 }

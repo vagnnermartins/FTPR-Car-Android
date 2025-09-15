@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "452999952893",
+    "project_id": "avaliacao-pos-api",
+    "storage_bucket": "avaliacao-pos-api.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452999952893:android:98246f826d42830fb90194",
+        "android_client_info": {
+          "package_name": "com.example.myapitest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452999952893-hkqovgivktha5krqkvhjupeejvp5omqb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapitest",
+            "certificate_hash": "dd124f52724cbd5fd8184d0ce87da11f63f3c9e8"
+          }
+        },
+        {
+          "client_id": "452999952893-l21ufruvnjp1qeaemequu0qqjumr0b3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSbfp5Xc2IU0ieqgsXCCeLKMO8MhR3AG8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452999952893-l21ufruvnjp1qeaemequu0qqjumr0b3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

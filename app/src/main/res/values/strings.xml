@@ -1,3 +1,32 @@
 <resources>
-    <string name="app_name">MyApiTest - COLOQUE O SEU NOME AQUI</string>
+    <string name="app_name">CarTrack</string>
+    <string name="login_app_description">Gerencie seus veículos</string>
+    <string name="btn_login_google">Entrar com Google</string>
+    <string name="btn_login_sms">Entrar com SMS</string>
+    <string name="top_bar_sms_code_verification_title">Verificação SMS</string>
+    <string name="verification_sms_description">Enviamos um código de 6 digitos para %1$s</string>
+    <string name="verification_screen_title">Insira o código</string>
+    <string name="btn_verify_code_sms">Verificar</string>
+    <string name="top_bar_number_sms_title">Entrar com SMS</string>
+    <string name="sms_number_title">Qual o seu celular?</string>
+    <string name="btn_label_number_cell">Número de celular</string>
+    <string name="btn_send_code_desc">Receber código</string>
+    <string name="sms_number_desc">Digite seu número para receber um código de verificação.</string>
+    <string name="car_form_edit_title_top_bar">Editar Veículo</string>
+    <string name="car_form_add_title_top_bar">Adicionar veículo</string>
+    <string name="label_tf_car_name">Nome do Veículo</string>
+    <string name="label_tf_car_year">Ano</string>
+    <string name="label_tf_car_plate">Placa</string>
+    <string name="label_tf_car_address">Endereço</string>
+    <string name="preview_car_details_screen_title">Modelo do carro</string>
+    <string name="preview_car_details_screen_button_desc">Editar informações</string>
+    <string name="btn_label_add_car">Adicionar veículo</string>
+    <string name="btn_label_edit_car">Salvar alterações</string>
+    <string name="delete_car_dialog_title">Confirmar Exclusão</string>
+    <string name="delete_car_dialog_desc">Você tem certeza que deseja deletar o veículo %1$s? Essa ação não pode ser desfeita.</string>
+    <string name="positive_btn_delete_car_dialog_desc">Deletar</string>
+    <string name="negative_btn_delete_car_dialog_desc">Cancelar</string>
+    <string name="car_details_screen_card_desc">Localização Atual</string>
+    <string name="default_web_client_id">704820842083-87qecha19d1p5k48j158j1q86napse13.apps.googleusercontent.com</string>
+    <string name="loading">Carregando</string>
 </resources>

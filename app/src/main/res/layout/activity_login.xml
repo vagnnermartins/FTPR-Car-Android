@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F8F9FA"
+        tools:context=".LoginActivity">
+
+        <!-- Top App Bar equivalent / Back button -->
+        <ImageButton
+            android:id="@+id/buttonBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_revert"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#1D1D1D" />
+
+        <TextView
+            android:id="@+id/textViewToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Autenticação"
+            android:textColor="#1D1D1D"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/buttonBack" />
+
+        <!-- Icon -->
+        <FrameLayout
+            android:id="@+id/iconContainer"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/bg_circle_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewToolbarTitle">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_car_blue" />
+        </FrameLayout>
+
+        <!-- Main Title -->
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="Bem-vindo"
+            android:textColor="#111822"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iconContainer" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:id="@+id/textViewSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Insira seu número de telefone para acessar sua conta com segurança."
+            android:textColor="#5F6D7D"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+
+        <!-- Phone Input Area -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/phoneInputContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="48dp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle">
+
+            <TextView
+                android:id="@+id/labelDDI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DDI"
+                android:textColor="#111822"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/labelPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Telefone"
+                android:textColor="#111822"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/countryCodePickerContainer"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <FrameLayout
+                android:id="@+id/countryCodePickerContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_border"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelDDI">
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/countryCodePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    app:ccp_autoDetectCountry="true"
+                    app:ccp_defaultNameCode="BR"
+                    app:ccp_showFullName="false"
+                    app:ccp_showNameCode="false"
+                    app:ccp_textSize="16sp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/phoneInputBg"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_border"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/countryCodePickerContainer"
+                app:layout_constraintTop_toBottomOf="@+id/labelPhone">
+
+                <EditText
+                    android:id="@+id/editTextPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:hint="(00) 00000-0000"
+                    android:inputType="phone"
+                    android:paddingHorizontal="16dp"
+                    android:textColor="#5F6D7D"
+                    android:textSize="16sp" />
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Verify Code Area (Initially Hidden) -->
+        <LinearLayout
+            android:id="@+id/verifyInputContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="48dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle"
+            tools:visibility="visible">
+
+            <EditText android:id="@+id/editTextCode1" android:layout_width="40dp" android:layout_height="48dp" android:background="@drawable/bg_code_input_underline" android:gravity="center" android:hint="•" android:inputType="number" android:maxLength="1" android:textColor="#111822" android:textSize="24sp" android:textStyle="bold" />
+            <EditText android:id="@+id/editTextCode2" android:layout_width="40dp" android:layout_height="48dp" android:layout_marginStart="8dp" android:background="@drawable/bg_code_input_underline" android:gravity="center" android:hint="•" android:inputType="number" android:maxLength="1" android:textColor="#111822" android:textSize="24sp" android:textStyle="bold" />
+            <EditText android:id="@+id/editTextCode3" android:layout_width="40dp" android:layout_height="48dp" android:layout_marginStart="8dp" android:background="@drawable/bg_code_input_underline" android:gravity="center" android:hint="•" android:inputType="number" android:maxLength="1" android:textColor="#111822" android:textSize="24sp" android:textStyle="bold" />
+            <EditText android:id="@+id/editTextCode4" android:layout_width="40dp" android:layout_height="48dp" android:layout_marginStart="8dp" android:background="@drawable/bg_code_input_underline" android:gravity="center" android:hint="•" android:inputType="number" android:maxLength="1" android:textColor="#111822" android:textSize="24sp" android:textStyle="bold" />
+            <EditText android:id="@+id/editTextCode5" android:layout_width="40dp" android:layout_height="48dp" android:layout_marginStart="8dp" android:background="@drawable/bg_code_input_underline" android:gravity="center" android:hint="•" android:inputType="number" android:maxLength="1" android:textColor="#111822" android:textSize="24sp" android:textStyle="bold" />
+            <EditText android:id="@+id/editTextCode6" android:layout_width="40dp" android:layout_height="48dp" android:layout_marginStart="8dp" android:background="@drawable/bg_code_input_underline" android:gravity="center" android:hint="•" android:inputType="number" android:maxLength="1" android:textColor="#111822" android:textSize="24sp" android:textStyle="bold" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/inputsBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="phoneInputContainer,verifyInputContainer" />
+
+        <!-- Button Action -->
+        <Button
+            android:id="@+id/buttonAction"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/bg_button_blue"
+            android:text="Enviar Código"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputsBarrier" />
+
+        <!-- Resend Code Container -->
+        <LinearLayout
+            android:id="@+id/resendContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAction"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Não recebeu o código?"
+                android:textColor="#5F6D7D"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/buttonResendCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="↻ Reenviar código"
+                android:textColor="#1E88E5"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Barrier to avoid terms overlaying the resend container -->
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/termsBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="buttonAction,resendContainer" />
+
+        <!-- Terms -->
+        <TextView
+            android:id="@+id/textViewTerms"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="Ao continuar, você concorda com os nossos Termos de Serviço e Política de Privacidade."
+            android:textColor="#8896A6"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/termsBarrier" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTerms" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

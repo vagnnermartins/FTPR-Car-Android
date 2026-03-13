@@ -25,8 +25,10 @@ android {
         }
         // Default fallbacks to emulator's localhost (10.0.2.2)
         def apiBaseUrl = localProperties.getProperty('API_BASE_URL') ?: System.getenv('API_BASE_URL') ?: "http://10.0.2.2:3000"
-        
         buildConfigField("String", "API_BASE_URL", "\"${apiBaseUrl}\"")
+
+        def mapsApiKey = localProperties.getProperty('MAPS_API_KEY') ?: System.getenv('MAPS_API_KEY') ?: ""
+        manifestPlaceholders = [MAPS_API_KEY: mapsApiKey]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

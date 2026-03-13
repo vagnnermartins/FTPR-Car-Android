@@ -81,6 +81,11 @@ class MainActivity : AppCompatActivity() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             fetchItems()
         }
+
+        binding.addCta.setOnClickListener {
+            val intent = Intent(this, CarFormActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun requestLocationPermission() {

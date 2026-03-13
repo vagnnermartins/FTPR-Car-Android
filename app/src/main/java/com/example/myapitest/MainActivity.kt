@@ -2,15 +2,25 @@ package com.example.myapitest
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapitest.adapter.CarAdapter
 import com.example.myapitest.databinding.ActivityMainBinding
+import com.example.myapitest.viewmodel.CarUiState
+import com.example.myapitest.viewmodel.CarViewModel
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: CarViewModel by viewModels()
+    private val adapter = CarAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,20 +35,38 @@ class MainActivity : AppCompatActivity() {
         }
         requestLocationPermission()
         setupView()
+        observeViewModel()
+    }
 
-        // 1- Criar tela de Login com algum provedor do Firebase (Telefone, Google)
-        //      Cadastrar o Seguinte celular para login de test: +5511912345678
-        //      Código de verificação: 101010
-
-        // 2- Criar Opção de Logout no aplicativo
-
-        // 3- Integrar API REST /car no aplicativo
-        //      API será disponibilida no Github
-        //      JSON Necessário para salvar e exibir no aplicativo
-        //      O Image Url deve ser uma foto armazenada no Firebase Storage
-        //      { "id": "001", "imageUrl":"https://image", "year":"2020/2020", "name":"Gaspar", "licence":"ABC-1234", "place": {"lat": 0, "long": 0} }
-
-        // Opcionalmente trabalhar com o Google Maps ara enviar o place
+    private fun observeViewModel() {
+        lifecycleScope.launch {
+            viewModel.uiState.collect { state ->
+                when (state) {
+                    is CarUiState.Loading -> {
+                        binding.swipeRefreshLayout.isRefreshing = true
+                    }
+                    is CarUiState.Success -> {
+                        binding.swipeRefreshLayout.isRefreshing = false
+                        adapter.submitList(state.cars)
+                        
+                        if (state.cars.isEmpty()) {
+                            binding.textViewEmpty.visibility = android.view.View.VISIBLE
+                            binding.recyclerView.visibility = android.view.View.GONE
+                        } else {
+                            binding.textViewEmpty.visibility = android.view.View.GONE
+                            binding.recyclerView.visibility = android.view.View.VISIBLE
+                        }
+                    }
+                    is CarUiState.Error -> {
+                        binding.swipeRefreshLayout.isRefreshing = false
+                        binding.textViewEmpty.visibility = android.view.View.VISIBLE
+                        binding.textViewEmpty.text = "Erro ao carregar os dados:\n${state.message}"
+                        binding.recyclerView.visibility = android.view.View.GONE
+                        Log.e("MainActivity", "Error: ${state.message}")
+                    }
+                }
+            }
+        }
     }
 
     override fun onResume() {
@@ -47,15 +75,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        // TODO
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = adapter
+        
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            fetchItems()
+        }
     }
 
     private fun requestLocationPermission() {
-        // TODO
+        // TODO: Location Logic
     }
 
     private fun fetchItems() {
-        // TODO
+        viewModel.fetchCars()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

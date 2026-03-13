@@ -22,6 +22,22 @@
                 app:layout_constraintBottom_toTopOf="@id/addCta"
                 tools:listitem="@layout/item_car_layout" />
 
+            <!-- Empty State Text -->
+            <TextView
+                android:id="@+id/textViewEmpty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nenhum carro encontrado.\nAdicione um novo no botão abaixo!"
+                android:gravity="center"
+                android:textColor="#888888"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:visibility="visible"/>
+
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/addCta"
                 android:layout_width="0dp"

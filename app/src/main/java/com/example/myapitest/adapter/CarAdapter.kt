@@ -34,11 +34,10 @@ class CarAdapter : ListAdapter<Car, CarAdapter.CarViewHolder>(CarDiffCallback())
             tvYear.text = car.year
             tvLicense.text = car.licence
             
-            // Load image using Coil
             image.load(car.imageUrl) {
                 crossfade(true)
-                placeholder(android.R.drawable.ic_menu_gallery) // Placeholder res
-                error(android.R.drawable.ic_menu_report_image) // Fallback on missing image
+                placeholder(android.R.drawable.ic_menu_gallery)
+                error(android.R.drawable.ic_menu_report_image)
                 transformations(coil.transform.CircleCropTransformation())
             }
         }

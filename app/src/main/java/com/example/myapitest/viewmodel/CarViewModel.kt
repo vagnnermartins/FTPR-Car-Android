@@ -38,23 +38,20 @@ class CarViewModel : ViewModel() {
     fun createCar(car: Car, imageUri: android.net.Uri?, userId: String = "default_user", onResult: (Boolean, String?) -> Unit) {
         viewModelScope.launch {
             try {
-                // 1. Upload Image if exists
                 var finalImageUrl = car.imageUrl
                 if (imageUri != null) {
                     val imageRepo = com.example.myapitest.repository.ImageRepository()
                     finalImageUrl = imageRepo.uploadImage(imageUri, userId)
                 }
 
-                // 2. Map new Car with possibly new Image URL
                 val carToSave = car.copy(imageUrl = finalImageUrl)
 
-                // 3. Save to API
                 repository.createCar(carToSave)
                     .catch { e ->
                         onResult(false, e.message)
                     }
                     .collect {
-                        fetchCars() // Refresh the list
+                        fetchCars()
                         onResult(true, null)
                     }
             } catch (e: Exception) {

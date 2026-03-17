@@ -14,9 +14,7 @@ class ImageRepository {
         val imageRef = storageRef.child("cars/$userId/$fileName")
 
         return try {
-            // Upload the file
             imageRef.putFile(imageUri).await()
-            // Get the download URL
             val downloadUrl = imageRef.downloadUrl.await()
             downloadUrl.toString()
         } catch (e: Exception) {

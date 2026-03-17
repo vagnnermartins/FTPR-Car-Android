@@ -36,7 +36,6 @@ class CarFormActivity : AppCompatActivity(), OnMapReadyCallback {
         setupToolbar()
         setupListeners()
         
-        // Map will be setup in Phase 4
         val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
@@ -44,7 +43,6 @@ class CarFormActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
         
-        // Default location (e.g., São Paulo)
         val defaultLoc = LatLng(-23.5505, -46.6333)
         googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLoc, 10f))
 
@@ -59,8 +57,6 @@ class CarFormActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupToolbar() {
-        // Assume no action bar is set from the Theme, but we might want a manual Back arrow.
-        // For now, relying on native back button is sufficient until fully styled.
     }
 
     private fun setupListeners() {
@@ -69,7 +65,6 @@ class CarFormActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         binding.imageContainer.setOnClickListener {
-            // Launch the photo picker
             imagePickerLauncher.launch("image/*")
         }
     }
@@ -97,7 +92,6 @@ class CarFormActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.progressBar.visibility = View.VISIBLE
         binding.buttonSave.isEnabled = false
 
-        // Map selected coordinates to Place
         val car = Car(
             id = UUID.randomUUID().toString(),
             imageUrl = "https://firebasestorage.googleapis.com/v0/b/ftpr-car.appspot.com/o/placeholder.png?alt=media",
@@ -107,7 +101,6 @@ class CarFormActivity : AppCompatActivity(), OnMapReadyCallback {
             place = Place(lat = selectedLat, long = selectedLng)
         )
 
-        // Pass the selectedImageUri to the view model
         viewModel.createCar(car, selectedImageUri) { success, errorMessage ->
             runOnUiThread {
                 binding.progressBar.visibility = View.GONE
@@ -115,7 +108,7 @@ class CarFormActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 if (success) {
                     Toast.makeText(this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show()
-                    finish() // Return to MainActivity
+                    finish()
                 } else {
                     Toast.makeText(this, "Erro ao salvar: $errorMessage", Toast.LENGTH_LONG).show()
                 }

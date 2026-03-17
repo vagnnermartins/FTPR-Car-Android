@@ -88,9 +88,10 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.12.0'
 
-    // Firebase
-    implementation platform('com.google.firebase:firebase-bom:32.8.0')
+    // Firebase BOM e Auth
+    implementation platform('com.google.firebase:firebase-bom:33.7.0')
     implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-storage'
 
     // Country Code Picker
     implementation 'com.hbb20:ccp:2.7.3'

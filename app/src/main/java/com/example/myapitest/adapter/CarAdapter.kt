@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.myapitest.R
 import com.example.myapitest.model.Car
 
@@ -32,7 +33,14 @@ class CarAdapter : ListAdapter<Car, CarAdapter.CarViewHolder>(CarDiffCallback())
             tvModel.text = car.name
             tvYear.text = car.year
             tvLicense.text = car.licence
-            // Placeholders until we integrate Picasso/Glide
+            
+            // Load image using Coil
+            image.load(car.imageUrl) {
+                crossfade(true)
+                placeholder(android.R.drawable.ic_menu_gallery) // Placeholder res
+                error(android.R.drawable.ic_menu_report_image) // Fallback on missing image
+                transformations(coil.transform.CircleCropTransformation())
+            }
         }
     }
 

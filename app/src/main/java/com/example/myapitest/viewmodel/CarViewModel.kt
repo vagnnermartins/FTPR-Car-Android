@@ -35,29 +35,56 @@ class CarViewModel : ViewModel() {
         }
     }
 
-    fun createCar(car: Car, onResult: (Boolean, String?) -> Unit) {
+    fun createCar(car: Car, imageUri: android.net.Uri?, userId: String = "default_user", onResult: (Boolean, String?) -> Unit) {
         viewModelScope.launch {
-            repository.createCar(car)
-                .catch { e ->
-                    onResult(false, e.message)
+            try {
+                // 1. Upload Image if exists
+                var finalImageUrl = car.imageUrl
+                if (imageUri != null) {
+                    val imageRepo = com.example.myapitest.repository.ImageRepository()
+                    finalImageUrl = imageRepo.uploadImage(imageUri, userId)
                 }
-                .collect {
-                    fetchCars() // Refresh the list
-                    onResult(true, null)
-                }
+
+                // 2. Map new Car with possibly new Image URL
+                val carToSave = car.copy(imageUrl = finalImageUrl)
+
+                // 3. Save to API
+                repository.createCar(carToSave)
+                    .catch { e ->
+                        onResult(false, e.message)
+                    }
+                    .collect {
+                        fetchCars() // Refresh the list
+                        onResult(true, null)
+                    }
+            } catch (e: Exception) {
+                onResult(false, e.message)
+            }
         }
     }
 
-    fun updateCar(id: String, car: Car, onResult: (Boolean, String?) -> Unit) {
+    fun updateCar(id: String, car: Car, imageUri: android.net.Uri?, userId: String = "default_user", onResult: (Boolean, String?) -> Unit) {
         viewModelScope.launch {
-            repository.updateCar(id, car)
-                .catch { e ->
-                    onResult(false, e.message)
+            try {
+                var finalImageUrl = car.imageUrl
+                if (imageUri != null) {
+                    val imageRepo = com.example.myapitest.repository.ImageRepository()
+                    finalImageUrl = imageRepo.uploadImage(imageUri, userId)
                 }
-                .collect {
-                    fetchCars() // Refresh the list
-                    onResult(true, null)
-                }
+
+                val carToSave = car.copy(imageUrl = finalImageUrl)
+
+                repository.updateCar(id, carToSave)
+                    .catch { e ->
+                        onResult(false, e.message)
+                    }
+                    .collect {
+                        fetchCars()
+                        onResult(true, null)
+                    }
+            } catch (e: Exception) {
+                onResult(false, e.message)
+            }
         }
     }
 }

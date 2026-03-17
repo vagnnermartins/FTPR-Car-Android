@@ -99,6 +99,21 @@ Para enviar o projeto finalizado, siga os passos abaixo:
 
 > **Nota**: Certifique-se de que o código está organizado e que todas as funcionalidades foram devidamente testadas antes de enviar o projeto.
 
+---
+
+### Executando o Projeto na Máquina Local
+
+Para que o aplicativo compile e funcione perfeitamente na sua máquina, é estritamente necessário configurar as Chaves de API das integrações (Google Maps e Firebase). 
+
+Por questões de segurança, **essas chaves não são versionadas** no GitHub. Elas vivem no arquivo oculto `local.properties`. 
+
+1. Baixe o arquivo `local.properties` disponibilizado no portal do **Moodle** da disciplina.
+2. Copie este arquivo e cole-o diretamente na raiz do projeto clonado (ao lado de arquivos como `build.gradle` e `settings.gradle`).
+   *Este arquivo deve conter variáveis como `MAPS_API_KEY` e `FIREBASE_API_KEY` necessárias para as chamadas REST e geração dinâmica do `google-services.json` durante o build.*
+3. Abra o projeto no **Android Studio**.
+4. Realize o *Sync Project with Gradle Files*. É nessa hora que o Gradle irá ler o `local.properties` e criar a infraestrutura das APis do Google.
+5. Selecione um emulador (ou dispositivo físico) e clique em **Run** (▶️).
+
 --- 
 
 Boa entrega e sucesso no desenvolvimento!

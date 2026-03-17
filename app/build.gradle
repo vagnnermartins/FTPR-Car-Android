@@ -2,7 +2,24 @@ plugins {
     id 'kotlin-kapt'
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
+
+def generateGoogleServices() {
+    def templateFile = file("google-services.json.template")
+    def targetFile = file("google-services.json")
+    if (templateFile.exists()) {
+        def localProps = new Properties()
+        def localPropsFile = rootProject.file("local.properties")
+        if (localPropsFile.exists()) {
+            localPropsFile.withInputStream { localProps.load(it) }
+        }
+        def apiKey = localProps.getProperty("FIREBASE_API_KEY") ?: System.getenv("FIREBASE_API_KEY") ?: "REPLACE_ME"
+        def content = templateFile.text.replace("\${FIREBASE_API_KEY}", apiKey)
+        targetFile.text = content
+    }
+}
+generateGoogleServices()
 
 android {
     namespace 'com.example.myapitest'
@@ -14,6 +31,19 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
+
+        def localProperties = new Properties()
+        def localPropertiesFile = rootProject.file('local.properties')
+        if (localPropertiesFile.exists()) {
+            localPropertiesFile.withReader('UTF-8') { reader ->
+                localProperties.load(reader)
+            }
+        }
+        def apiBaseUrl = localProperties.getProperty('API_BASE_URL') ?: System.getenv('API_BASE_URL') ?: "http://10.0.2.2:3000"
+        buildConfigField("String", "API_BASE_URL", "\"${apiBaseUrl}\"")
+
+        def mapsApiKey = localProperties.getProperty('MAPS_API_KEY') ?: System.getenv('MAPS_API_KEY') ?: ""
+        manifestPlaceholders = [MAPS_API_KEY: mapsApiKey]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -36,7 +66,10 @@ android {
     }
     buildFeatures {
         compose true
+        dataBinding true
+        buildConfig true
     }
+    
     composeOptions {
         kotlinCompilerExtensionVersion '1.4.3'
     }
@@ -45,9 +78,6 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
-    buildFeatures {
-        dataBinding true // Habilita o Data Binding
-    }
     viewBinding {
         enabled = true
     }
@@ -55,7 +85,6 @@ android {
 
 kapt {
 
-    // Define o diretório onde o Room exportará o esquema do banco de dados
     arguments {
         arg("room.schemaLocation", "$projectDir/schemas")
     }
@@ -73,22 +102,25 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.12.0'
 
-    // Coroutines
+    implementation platform('com.google.firebase:firebase-bom:33.7.0')
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-storage'
+
+    implementation 'com.hbb20:ccp:2.7.3'
+
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
-    // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
 
     implementation 'com.squareup.picasso:picasso:2.8'
+    implementation 'io.coil-kt:coil:2.6.0'
 
-    // Localização
     implementation 'com.google.android.gms:play-services-location:21.3.0'
     implementation 'com.google.android.gms:play-services-maps:19.0.0'
 
-    // Room
     implementation "androidx.room:room-runtime:2.6.1"
     annotationProcessor "androidx.room:room-compiler:2.6.1"
     kapt "androidx.room:room-compiler:2.6.1"

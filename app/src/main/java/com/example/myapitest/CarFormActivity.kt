@@ -7,11 +7,18 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.example.myapitest.databinding.ActivityCarFormBinding
 import com.example.myapitest.model.Car
 import com.example.myapitest.model.Place
+import com.example.myapitest.utils.MaskWatcher
 import com.example.myapitest.viewmodel.CarViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
+import java.io.File
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -27,6 +34,7 @@ class CarFormActivity : AppCompatActivity(), OnMapReadyCallback {
     private var googleMap: GoogleMap? = null
     private var selectedLat: Double = 0.0
     private var selectedLng: Double = 0.0
+    private var isLocationSelected: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +60,7 @@ class CarFormActivity : AppCompatActivity(), OnMapReadyCallback {
             
             selectedLat = latLng.latitude
             selectedLng = latLng.longitude
+            isLocationSelected = true
             binding.textSelectedLocation.text = "Lat: ${String.format("%.4f", latLng.latitude)}, Lng: ${String.format("%.4f", latLng.longitude)}"
         }
     }
@@ -60,12 +69,70 @@ class CarFormActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupListeners() {
+        binding.editTextYear.addTextChangedListener(MaskWatcher("####/####"))
+        binding.editTextLicence.addTextChangedListener(MaskWatcher("AAA-####"))
+
         binding.buttonSave.setOnClickListener {
             saveCar()
         }
 
         binding.imageContainer.setOnClickListener {
-            imagePickerLauncher.launch("image/*")
+            showImagePickerOptions()
+        }
+    }
+
+    private fun showImagePickerOptions() {
+        val options = arrayOf("Câmera", "Galeria")
+        AlertDialog.Builder(this)
+            .setTitle("Escolha uma opção")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> openCamera()
+                    1 -> openGallery()
+                }
+            }
+            .show()
+    }
+
+    private fun openGallery() {
+        imagePickerLauncher.launch("image/*")
+    }
+
+    private fun openCamera() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            launchCamera()
+        } else {
+            requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+        }
+    }
+
+    private val requestCameraPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            launchCamera()
+        } else {
+            Toast.makeText(this, "Permissão de câmera negada", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun launchCamera() {
+        val photoFile = File(cacheDir, "camera_images").apply { mkdirs() }
+        val file = File(photoFile, "${UUID.randomUUID()}.jpg")
+        val uri = FileProvider.getUriForFile(this, "${packageName}.fileprovider", file)
+        selectedImageUri = uri
+        
+        takePictureLauncher.launch(uri)
+    }
+
+    private val takePictureLauncher = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { success: Boolean ->
+        if (success) {
+            binding.imageViewCar.setImageURI(selectedImageUri)
+            binding.iconAddPhoto.visibility = View.GONE
+        } else {
+            selectedImageUri = null
         }
     }
 
@@ -86,6 +153,11 @@ class CarFormActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if (name.isBlank() || year.isBlank() || licence.isBlank()) {
             Toast.makeText(this, "Preencha os campos obrigatórios", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (!isLocationSelected) {
+            Toast.makeText(this, "Selecione uma localização no Mapa", Toast.LENGTH_SHORT).show()
             return
         }
 

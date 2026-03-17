@@ -44,3 +44,7 @@ local.properties
 # OS specific files
 .DS_Store
 Thumbs.db
+
+# RZ - Google Services (Firebase configuration) - Excluído para segurança do projeto
+google-services.json
+app/google-services.json

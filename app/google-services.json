@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1051780925831",
+    "project_id": "apps-posutfpr",
+    "storage_bucket": "apps-posutfpr.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051780925831:android:4cfd9d7682deea0ce32b22",
+        "android_client_info": {
+          "package_name": "com.example.myapitest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-eqJauLuGYPPrM3mwq4YxU62jXj70GHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051780925831:android:ca546b4670cae791e32b22",
+        "android_client_info": {
+          "package_name": "io.ztechnologies.appcar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-eqJauLuGYPPrM3mwq4YxU62jXj70GHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

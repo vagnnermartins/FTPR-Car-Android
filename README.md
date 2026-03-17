@@ -1,104 +1,66 @@
-# Exercício: Integração de Autenticação e API REST no Aplicativo Android
+# 🚗 MyApiTeste - Gerenciamento de Frota (ZARONIROD)
 
-Este projeto envolve a criação de uma tela de login com o Firebase, integração de uma API REST e a exibição de dados em um aplicativo Android. Siga as instruções abaixo para configurar e implementar as funcionalidades solicitadas.
-
-### Requisitos
-
-- **IDE**: Android Studio
-- **Bibliotecas**: Firebase Authentication, Firebase Storage, Retrofit (para requisições REST), Google Maps
-
-## Instruções
-
-### 1. Tela de Login com Firebase
-
-Implemente uma tela de login que use um dos provedores de autenticação do Firebase (recomenda-se usar autenticação por telefone ou Google).
-
-- **Autenticação por telefone**:
-    - Configure o Firebase para aceitar o número de telefone: `+55 11 91234-5678`.
-    - Defina o código de verificação para login de teste como `123456`.
-
-- **Autenticação com Google** (caso escolha esta opção) (OPCIONAL):
-    - Habilite a autenticação com Google nas configurações do Firebase Console.
-    - Implemente a lógica de autenticação no aplicativo, usando o provedor de login do Google.
-
-### 2. Opção de Logout
-
-Adicione uma opção de logout ao aplicativo, permitindo que o usuário saia da conta autenticada. Essa opção deve estar disponível em uma área visível, como o menu principal ou um botão específico na interface.
-
-### 3. Integração com API REST `/car`
-
-Implemente a integração com uma API REST disponível no [Link] (https://github.com/vagnnermartins/FTPR-Car-Api-Node-Express) para exibir e salvar informações de carros no aplicativo.
-
-- **Estrutura JSON Esperada**:
-    ```json
-    {
-      "imageUrl": "https://image",
-      "year": "2020/2020",
-      "name": "Gaspar",
-      "licence": "ABC-1234",
-      "place": {
-        "lat": 0,
-        "long": 0
-      }
-    }
-    ```
-
-- **Requisitos Específicos**:
-    - O campo `imageUrl` deve apontar para uma imagem armazenada no Firebase Storage.
-    - Exiba a imagem e as informações de cada carro no aplicativo.
-    - Utilize Retrofit para realizar as requisições à API.
-
-### 4. Exibir Localização no Google Maps
-
-Utilize a API do Google Maps para exibir o local (`place`) associado ao carro. Essa localização é especificada pelos campos `lat` e `long` no JSON da API.
+Eu desenvolvi este aplicativo como projeto final para a pós-graduação na **UTFPR**. O objetivo é gerenciar uma lista de carros integrada a uma API REST local, utilizando o ecossistema Firebase para autenticação e armazenamento de imagens, além do Google Maps para geolocalização.
 
 ---
 
-### Configuração do Projeto
+### 🚀 Minhas Funcionalidades Implementadas
 
-1. **Firebase**: Configure o projeto com Firebase Authentication e Firebase Storage. Adicione o `google-services.json` ao projeto para integração.
-2. **Google Maps**: Habilite a API do Google Maps e adicione uma chave de API ao projeto.
-3. **Dependências Gradle**:
-    - **Firebase**: `Firebase Authentication` e `Firebase Storage`
-    - **Retrofit** para a comunicação com a API REST
-    - **Picasso** ou outra biblioteca para carregamento de imagens
-    - **Google Maps SDK** 
+Neste app, eu foquei em criar uma experiência fluida e completa (CRUD) com as seguintes características:
 
-### Entrega do Exercício
+1.  **Autenticação Segura (Firebase Auth):**
+    *   Implementei o login via **Telefone**. Configurei o Firebase para aceitar o número de teste `+55 11 91234-5678` com o código `123456`.
+    *   Incluí uma opção de **Logout** acessível em todas as telas principais e um ícone de "Sair do App" que encerra completamente a aplicação.
 
-Aqui está a seção detalhada sobre a entrega do projeto com as instruções para fazer um fork:
+2.  **Gestão de Carros (API REST + Retrofit):**
+    *   O app consome uma API Node/Express para listar, cadastrar, atualizar e deletar carros.
+    *   **Listagem Dinâmica:** Uso `RecyclerView` com `Picasso` para carregar as fotos e dados técnicos diretamente da API.
+    *   **Tratamento de Erros:** O app identifica se o servidor está offline e exibe a mensagem: *"Verifique sua rede - sem acesso ao servidor"*.
+
+3.  **Cadastro e Edição Completa:**
+    *   **Upload de Fotos:** Ao cadastrar ou atualizar um carro, a foto é enviada para o **Firebase Storage**, gerando um link público que é salvo na API.
+    *   **Ficha do Carro:** Permite editar modelo e ano. A placa (licence) é tratada como chave primária, exibida com destaque em fundo preto e protegida contra edição.
+    *   **Hourglass (Feedback):** Implementei um overlay de carregamento ("ampulheta") em todas as operações de rede para que o usuário saiba que o sistema está processando.
+
+4.  **Geolocalização (Google Maps SDK):**
+    *   Integrei o Google Maps para exibir a localização exata de cada carro.
+    *   **Mapa Manual:** Na tela de cadastro e edição, é possível escolher a localização arrastando o mapa. Como padrão, o mapa inicia no **Cristo Redentor (RJ)** caso nenhuma coordenada seja informada.
+    *   **GPS:** Opção de capturar a latitude e longitude atual do dispositivo.
+
+5.  **Sistema de Backup (Firestore):**
+    *   Criei um botão exclusivo de **BACKUP** na tela principal.
+    *   Ele realiza uma cópia de segurança de todos os itens da API para o **Cloud Firestore**, criando coleções datadas (ex: `rzcarapp_backups_20231027_1430`).
+    *   O processo mostra o progresso em tempo real (etapas e erros) no overlay de carregamento.
 
 ---
 
-### Entrega do Projeto
+### 📸 Galeria e Demonstração
 
-Para enviar o projeto finalizado, siga os passos abaixo:
+Na pasta **`Fotos_videos_do_app_funcionando`**, você encontrará diversos prints de tela e um pequeno vídeo demonstrando o aplicativo em ação.
 
-1. **Faça um Fork do Projeto**:
-    - No GitHub, vá até a página do repositório original.
-    - Clique em "Fork" no canto superior direito da página para criar uma cópia do repositório em seu GitHub pessoal.
+#### Telas Principais:
+| Listagem de Carros | Cadastro de Novo | Seleção de Localização |
+|:---:|:---:|:---:|
+| ![Tela Principal](Fotos_videos_do_APP_Funcionando/APP_TelaPrincipal.png) | ![Cadastro](Fotos_videos_do_APP_Funcionando/APP_Tela_de_cadastro.jpg) | ![Mapa](Fotos_videos_do_APP_Funcionando/APP_EscolherLocalizacao.png) |
 
-2. **Clone o Repositório Forkado**:
-    - No seu perfil do GitHub, acesse o repositório forkado.
-    - Copie o link de clonagem (HTTPS ou SSH).
-    - No terminal, clone o repositório em sua máquina local:
-      ```bash
-      git clone <link-do-repositorio-forkado>
-      ```
+---
 
-3. **Implemente as Funcionalidades**:
-    - Siga as instruções do exercício para implementar as funcionalidades.
-    - Após concluir, adicione, faça commit e push das alterações para o repositório forkado.
+### 🛠️ Requisitos Técnicos Atendidos
 
-4. **Publicação**:
-    - **Opção 1**: Envie o projeto final no seu repositório forkado. Compartilhe o link do repositório com o instrutor para avaliação.
-    - **Opção 2**: Faça um Pull Request para o repositório original. Para isso:
-        - Acesse o repositório original no GitHub.
-        - Clique em "Compare & pull request" para iniciar o processo de Pull Request.
-        - Descreva as alterações feitas e confirme o envio.
+*   **IDE:** Android Studio (Kotlin).
+*   **API:** Integração via Retrofit com suporte a GET, POST, PATCH e DELETE.
+*   **Firebase:** Authentication (Phone), Storage (Imagens) e Firestore (Backups).
+*   **Imagens:** Carregamento otimizado com a biblioteca Picasso.
+*   **Maps:** Google Maps SDK for Android.
+*   **Configuração:** Centralizei as chaves de banco e URLs no arquivo `configuracoesapi.xml`.
 
-> **Nota**: Certifique-se de que o código está organizado e que todas as funcionalidades foram devidamente testadas antes de enviar o projeto.
+---
 
---- 
+### ⚠️ Como Rodar o Projeto
 
-Boa entrega e sucesso no desenvolvimento!
+1.  **Firebase:** Adicione o seu `google-services.json` na pasta `app/`.
+2.  **API Key:** Insira sua chave do Google Maps no `AndroidManifest.xml`.
+3.  **Servidor:** Certifique-se de que a API Node/Express está rodando no endereço configurado em `res/values/configuracoesapi.xml`.
+4.  **Firebase Console:** Certifique-se de ter criado o banco de dados Firestore com o nome `rzcarapp` (ou o nome definido no seu XML).
+
+**RZ - Projeto revisado, refatorado e pronto para avaliação.**

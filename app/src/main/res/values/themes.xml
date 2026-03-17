@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- RZ - Tema atualizado para MaterialComponents para suportar CardView e FAB -->
+    <style name="Theme.MyApiTest" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Cor principal do app (Preto) -->
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">#333333</item>
+        <item name="android:textColorPrimary">@color/white</item>
 
-    <style name="Theme.MyApiTest" parent="android:Theme.Material.Light.NoActionBar" />
+        <!-- Cor secundária (Teal/Cinza) -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+
+        <!-- Cor da barra de status -->
+        <item name="android:statusBarColor">#000000</item>
+
+        <!-- Ajuste para evitar o erro de 'attr/onPrimary not found' em algumas builds -->
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+    </style>
 </resources>

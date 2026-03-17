@@ -2,6 +2,8 @@ plugins {
     id 'kotlin-kapt'
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    // RZ - Plugin do Google Services para Firebase
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -38,7 +40,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.4.3'
+        kotlinCompilerExtensionVersion '1.5.14'
     }
     packaging {
         resources {
@@ -46,7 +48,7 @@ android {
         }
     }
     buildFeatures {
-        dataBinding true // Habilita o Data Binding
+        dataBinding true // RZ - Habilita o Data Binding para facilitar o acesso aos componentes do layout
     }
     viewBinding {
         enabled = true
@@ -55,7 +57,7 @@ android {
 
 kapt {
 
-    // Define o diretório onde o Room exportará o esquema do banco de dados
+    // RZ - Define o diretório onde o Room exportará o esquema do banco de dados
     arguments {
         arg("room.schemaLocation", "$projectDir/schemas")
     }
@@ -73,22 +75,29 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.12.0'
 
-    // Coroutines
+    // RZ - Firebase (BoM para gerenciar versões)
+    implementation platform('com.google.firebase:firebase-bom:33.1.0')
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx' // RZ - Adicionado Firestore
+
+    // RZ - Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
-    // Retrofit
+    // RZ - Retrofit e Redes
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
 
+    // RZ - Imagens com Picasso
     implementation 'com.squareup.picasso:picasso:2.8'
 
-    // Localização
+    // RZ - Localização e Google Maps
     implementation 'com.google.android.gms:play-services-location:21.3.0'
     implementation 'com.google.android.gms:play-services-maps:19.0.0'
 
-    // Room
+    // RZ - Room Banco de Dados
     implementation "androidx.room:room-runtime:2.6.1"
     annotationProcessor "androidx.room:room-compiler:2.6.1"
     kapt "androidx.room:room-compiler:2.6.1"

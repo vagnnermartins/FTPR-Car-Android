@@ -20,8 +20,17 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: CarViewModel by viewModels()
-    private val adapter = CarAdapter()
-
+    private val adapter = CarAdapter { car ->
+        val uri = android.net.Uri.parse("geo:${car.place.lat},${car.place.long}?z=15&q=${car.place.lat},${car.place.long}(${car.name})")
+        val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, uri)
+        intent.setPackage("com.google.android.apps.maps")
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        } else {
+            // Fallback to browser if Maps app is not installed
+            startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, uri))
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

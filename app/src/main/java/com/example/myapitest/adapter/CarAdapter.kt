@@ -12,7 +12,7 @@ import coil.load
 import com.example.myapitest.R
 import com.example.myapitest.model.Car
 
-class CarAdapter : ListAdapter<Car, CarAdapter.CarViewHolder>(CarDiffCallback()) {
+class CarAdapter(private val onCarClick: (Car) -> Unit) : ListAdapter<Car, CarAdapter.CarViewHolder>(CarDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_car_layout, parent, false)
@@ -20,7 +20,11 @@ class CarAdapter : ListAdapter<Car, CarAdapter.CarViewHolder>(CarDiffCallback())
     }
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val car = getItem(position)
+        holder.bind(car)
+        holder.itemView.setOnClickListener {
+            onCarClick(car)
+        }
     }
 
     class CarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

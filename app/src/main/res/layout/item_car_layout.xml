@@ -12,9 +12,21 @@
         android:id="@+id/image"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:contentDescription="@string/car_image_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnEdit"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/edit_car_description"
+        android:src="@android:drawable/ic_menu_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/primary" />
 
     <TextView
         android:id="@+id/model"
@@ -23,7 +35,7 @@
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnEdit"
         tools:text="Honda Civic" />
 
     <TextView
@@ -33,7 +45,7 @@
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toBottomOf="@id/model"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnEdit"
         tools:text="2019/2019" />
 
     <TextView
@@ -43,7 +55,7 @@
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toBottomOf="@id/year"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnEdit"
         tools:text="ABC-1234"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

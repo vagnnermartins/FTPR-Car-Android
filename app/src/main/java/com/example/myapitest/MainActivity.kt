@@ -43,13 +43,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        adapter = CarAdapter(emptyList()) { car ->
-            val intent = Intent(this, MapsActivity::class.java)
-            intent.putExtra("LAT", car.place.lat)
-            intent.putExtra("LONG", car.place.long)
-            intent.putExtra("CAR_NAME", car.name)
-            startActivity(intent)
-        }
+        adapter = CarAdapter(
+            emptyList(),
+            onCarClick = { car ->
+                val intent = Intent(this, MapsActivity::class.java)
+                intent.putExtra("LAT", car.place.lat)
+                intent.putExtra("LONG", car.place.long)
+                intent.putExtra("CAR_NAME", car.name)
+                startActivity(intent)
+            },
+            onEditClick = { car ->
+                startActivity(CarDetailActivity.createEditIntent(this, car))
+            }
+        )
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
     }
@@ -70,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.error.observe(this) { message ->
-            Toast.makeText(this, "Erro ao carregar: $message", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.load_error, message), Toast.LENGTH_SHORT).show()
             binding.swipeRefreshLayout.isRefreshing = false
             
             // Em caso de erro e lista vazia, mostra estado vazio ou mantém anterior

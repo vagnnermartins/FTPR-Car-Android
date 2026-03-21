@@ -26,6 +26,7 @@ local.properties
 *.dex
 *.class
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 *.war
 *.so
 *.o
@@ -51,6 +52,7 @@ gradle/native/
 gradle/wrapper/dists/
 gradle/.tmp/
 gradle/kotlin-profile/
+gradle/notifications/
 app/google-services.json
 package-lock.json
 gradle/caches/

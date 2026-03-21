@@ -7,7 +7,11 @@ import com.example.myapitest.databinding.ItemCarLayoutBinding
 import com.example.myapitest.model.Car
 import com.squareup.picasso.Picasso
 
-class CarAdapter(private var cars: List<Car>, private val onCarClick: (Car) -> Unit) :
+class CarAdapter(
+    private var cars: List<Car>,
+    private val onCarClick: (Car) -> Unit,
+    private val onEditClick: (Car) -> Unit
+) :
     RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
     class CarViewHolder(val binding: ItemCarLayoutBinding) : RecyclerView.ViewHolder(binding.root)
@@ -30,6 +34,7 @@ class CarAdapter(private var cars: List<Car>, private val onCarClick: (Car) -> U
         }
 
         holder.itemView.setOnClickListener { onCarClick(car) }
+        holder.binding.btnEdit.setOnClickListener { onEditClick(car) }
     }
 
     override fun getItemCount() = cars.size

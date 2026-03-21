@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
             if (phoneNumber.isNotEmpty()) {
                 sendVerificationCode(phoneNumber)
             } else {
-                Toast.makeText(this, "Digite o número de telefone", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.enter_phone_number), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
             if (code.isNotEmpty() && verificationId != null) {
                 verifyCode(code)
             } else {
-                Toast.makeText(this, "Digite o código", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.enter_code), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -61,14 +61,18 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onVerificationFailed(e: FirebaseException) {
-                    Toast.makeText(this@LoginActivity, "Erro: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@LoginActivity,
+                        getString(R.string.firebase_error, e.message ?: ""),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
                 override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                     this@LoginActivity.verificationId = verificationId
                     binding.tilCode.visibility = View.VISIBLE
                     binding.btnVerifyCode.visibility = View.VISIBLE
-                    Toast.makeText(this@LoginActivity, "Código enviado!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, getString(R.string.code_sent), Toast.LENGTH_SHORT).show()
                 }
             })
             .build()
@@ -89,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    Toast.makeText(this, "Falha na verificação", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.verification_failed), Toast.LENGTH_SHORT).show()
                 }
             }
     }

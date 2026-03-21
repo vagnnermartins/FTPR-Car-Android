@@ -2,6 +2,7 @@ package com.example.myapitest
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapitest.databinding.ActivityMapsBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -11,6 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    private lateinit var binding: ActivityMapsBinding
     private lateinit var mMap: GoogleMap
     private var lat: Double = 0.0
     private var long: Double = 0.0
@@ -18,11 +20,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_maps)
+        binding = ActivityMapsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         lat = intent.getDoubleExtra("LAT", 0.0)
         long = intent.getDoubleExtra("LONG", 0.0)
-        carName = intent.getStringExtra("CAR_NAME") ?: "Carro"
+        carName = intent.getStringExtra("CAR_NAME") ?: getString(R.string.default_car_name)
+
+        binding.btnBack.setOnClickListener { finish() }
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment

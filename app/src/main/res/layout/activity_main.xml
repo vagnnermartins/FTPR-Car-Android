@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Meus Carros"
+                android:text="@string/cars_title"
                 android:textColor="@color/text_primary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -34,7 +34,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_logout"
-                android:contentDescription="Sair"
+                android:contentDescription="@string/logout_description"
                 app:tint="@color/accent" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -69,7 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nenhum carro cadastrado ainda."
+                    android:text="@string/empty_cars_title"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Clique em Adicionar para cadastrar seu primeiro carro."
+                    android:text="@string/empty_cars_message"
                     android:textColor="@color/text_secondary"
                     android:gravity="center" />
             </LinearLayout>
@@ -90,6 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
+        android:contentDescription="@string/add_car_description"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"

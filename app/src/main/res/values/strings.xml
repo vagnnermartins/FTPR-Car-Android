@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">MyApiTest - COLOQUE O SEU NOME AQUI</string>
+    <string name="app_name">MyApiTest</string>
+    <string name="location_permission_required">Permissão de localização é necessária para salvar sua posição.</string>
+    <string name="error_fetch_data">Erro ao carregar dados da API.</string>
+    <string name="no_data_available">Nenhum carro encontrado.</string>
+    <string name="menu_loggout">Sair</string>
+    <string name="RicardoSouza">Ricardo José de Souza</string>
+
+    <!-- Login Activity Strings -->
+    <string name="hint_cellphone">Celular</string>
+    <string name="code_brazil">+55</string>
+    <string name="send_sms">Enviar SMS</string>
+    <string name="hint_verify_sms">Código de Verificação</string>
+    <string name="verify_sms">Verificar Código</string>
 </resources>

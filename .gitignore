@@ -44,3 +44,12 @@ local.properties
 # OS specific files
 .DS_Store
 Thumbs.db
+gradle/caches/
+gradle/daemon/
+gradle/jdks/
+gradle/native/
+gradle/wrapper/dists/
+gradle/.tmp/
+gradle/kotlin-profile/
+app/google-services.json
+package-lock.json

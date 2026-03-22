@@ -47,6 +47,7 @@ Implemente a integração com uma API REST disponível no [Link] (https://github
     - O campo `imageUrl` deve apontar para uma imagem armazenada no Firebase Storage.
     - Exiba a imagem e as informações de cada carro no aplicativo.
     - Utilize Retrofit para realizar as requisições à API.
+    - URL da Minha Imagem: gs://carlist-85b02.firebasestorage.app/ferrariModena.jpeg
 
 ### 4. Exibir Localização no Google Maps
 

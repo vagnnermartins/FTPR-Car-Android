@@ -4,6 +4,12 @@ build/
 */build/
 !*/src/**/build/
 
+
+# Chaves do Firebase
+app/src/google-services.json
+app/src/main/res/values/strings.xml
+
+
 # Local configuration file (local.properties)
 local.properties
 

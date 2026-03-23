@@ -1,4 +1,4 @@
-package com.example.myapitest
+package com.utfpr.ftprcar
 
 import org.junit.Test
 

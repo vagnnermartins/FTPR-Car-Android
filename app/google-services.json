@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1096356118572",
+    "project_id": "ftpr-car-5ec93",
+    "storage_bucket": "ftpr-car-5ec93.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096356118572:android:47dafe1d41ef9d94125189",
+        "android_client_info": {
+          "package_name": "com.utfpr.ftprcar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "${FIREBASE_API_KEY}"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

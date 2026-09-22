@@ -28,8 +28,17 @@
                 android:layout_height="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/logoutCta"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@android:drawable/ic_menu_add" />
+                android:src="@drawable/ic_add" />
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/logoutCta"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/addCta"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/ic_logout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
